@@ -362,8 +362,11 @@ import { QrcodeStream } from "qrcode-reader-vue3";
 import aprotocol from "../shared/algorand-protocol-parse";
 import MainLayout from "../layouts/Main.vue";
 import algosdk from "algosdk";
-import type { Transaction } from "algosdk";
-import { AlgorandClient } from "@algorandfoundation/algokit-utils";
+import type { Address, Transaction } from "algosdk";
+import {
+  AlgorandClient,
+  populateAppCallResources,
+} from "@algorandfoundation/algokit-utils";
 import SelectAccount from "../components/SelectAccount.vue";
 import TabView from "primevue/tabview";
 import TabPanel from "primevue/tabpanel";
@@ -373,6 +376,7 @@ import { Buffer } from "buffer";
 import type { WalletAccount, IAccountData } from "@/store/wallet";
 import { ExtendedStoredAsset, StoredAsset } from "@/store/indexer";
 import { BoxReference } from "@algorandfoundation/algokit-utils/types/app-manager";
+import { TransactionComposer } from "@algorandfoundation/algokit-utils/types/composer";
 
 type AccountNetworkData = IAccountData;
 
@@ -1100,73 +1104,6 @@ const redirectToARC200Payment = async () => {
       defaultSender: senderAddr,
       defaultSigner: undefined,
     });
-    var boxFromDirect: BoxReference = {
-      // : algosdk.BoxReference
-      appId: BigInt(appId),
-      name: new Uint8Array(
-        Buffer.from(algosdk.decodeAddress(senderAddr).publicKey),
-      ),
-    };
-    var boxFrom: BoxReference = {
-      // : algosdk.BoxReference
-      appId: BigInt(appId),
-      name: new Uint8Array(
-        Buffer.concat([
-          Buffer.from([0x00]),
-          Buffer.from(algosdk.decodeAddress(senderAddr).publicKey),
-        ]),
-      ), // data box
-    };
-    var boxTo: BoxReference = {
-      // : algosdk.BoxReference
-      appId: BigInt(appId),
-      name: new Uint8Array(
-        Buffer.concat([
-          Buffer.from([0x00]),
-          Buffer.from(algosdk.decodeAddress(state.payTo).publicKey),
-        ]),
-      ), // data box
-    };
-    var boxFromBalance: BoxReference = {
-      // : algosdk.BoxReference
-      appId: BigInt(appId),
-      name: new Uint8Array(
-        Buffer.concat([
-          Buffer.from("balances", "ascii"),
-          Buffer.from(algosdk.decodeAddress(senderAddr).publicKey),
-        ]),
-      ), // data box
-    };
-    var boxToBalance: BoxReference = {
-      // : algosdk.BoxReference
-      appId: BigInt(appId),
-      name: new Uint8Array(
-        Buffer.concat([
-          Buffer.from("balances", "ascii"),
-          Buffer.from(algosdk.decodeAddress(state.payTo).publicKey),
-        ]),
-      ), // data box
-    };
-    var boxFromAddrText: BoxReference = {
-      // : algosdk.BoxReference
-      appId: BigInt(appId),
-      name: new Uint8Array(Buffer.from(state.payTo, "ascii")), // box as the address encoded as text
-    };
-    const compose = await client.createTransaction.arc200Transfer({
-      args: {
-        to: state.payTo,
-        value: BigInt(amountLong.value),
-      },
-      boxReferences: [
-        boxFromDirect,
-        boxFromBalance,
-        boxFrom,
-        boxTo,
-        boxToBalance,
-        boxFromAddrText,
-      ],
-    });
-
     const enc = new TextEncoder();
     const noteEnc = enc.encode("g");
     const optedIn = await accountIsOptedInToArc200Asset(state.payTo);
@@ -1180,22 +1117,81 @@ const redirectToARC200Payment = async () => {
         asset: undefined,
         reKeyTo: undefined,
       });
-      const txsToSign = [payTx, ...compose.transactions];
-      algosdk.assignGroupID(txsToSign);
-      await signerToSignArray({ txs: txsToSign });
+
+      const compose = await client.createTransaction.arc200Transfer({
+        args: {
+          to: state.payTo,
+          value: BigInt(amountLong.value),
+        },
+        boxReferences: [],
+      });
+
+      const dummyTransactionSigner = async (
+        _txnGroup: algosdk.Transaction[],
+        _indexesToSign: number[],
+      ): Promise<Uint8Array[]> => {
+        return [] as Uint8Array[];
+      };
+      // fill in the resources
+      const composer = new TransactionComposer({
+        algod: algorandClient.client.algod,
+        getSigner: (_address: string | Address) => dummyTransactionSigner,
+      });
+      composer.addTransaction(payTx);
+      compose.transactions.forEach((txn) => {
+        composer.addTransaction(txn);
+      });
+      const { atc } = await composer.build();
+      const populatedAtc = await populateAppCallResources(atc, algod);
+      const group = populatedAtc.buildGroup();
+      const toSignFinal = group.map((txnWithSigner) => {
+        return txnWithSigner.txn;
+      });
+      await signerToSignArray({ txs: toSignFinal });
       await router.push("/signAll");
     } else {
-      const firstTxn = compose.transactions[0];
-      if (!firstTxn) {
-        throw new Error("No ARC200 transaction available to sign");
+      const compose = await client.createTransaction.arc200Transfer({
+        args: {
+          to: state.payTo,
+          value: BigInt(amountLong.value),
+        },
+        boxReferences: [],
+      });
+
+      const dummyTransactionSigner = async (
+        _txnGroup: algosdk.Transaction[],
+        _indexesToSign: number[],
+      ): Promise<Uint8Array[]> => {
+        return [] as Uint8Array[];
+      };
+      // fill in the resources
+      const composer = new TransactionComposer({
+        algod: algorandClient.client.algod,
+        getSigner: (_address: string | Address) => dummyTransactionSigner,
+      });
+      compose.transactions.forEach((txn) => {
+        composer.addTransaction(txn);
+      });
+      const { atc } = await composer.build();
+      const populatedAtc = await populateAppCallResources(atc, algod);
+      const group = populatedAtc.buildGroup();
+      const toSignFinal = group.map((txnWithSigner) => {
+        return txnWithSigner.txn;
+      });
+      if (toSignFinal.length > 1) {
+        await signerToSignArray({ txs: toSignFinal });
+        await router.push("/signAll");
+        return;
+      } else {
+        const firstTxn = toSignFinal[0];
+        state.tx = firstTxn;
+        const encoded = base642base64url(
+          Buffer.from(algosdk.encodeUnsignedTransaction(firstTxn)).toString(
+            "base64",
+          ),
+        );
+        router.push(`/sign/${senderAddr}/${encoded}`);
       }
-      state.tx = firstTxn;
-      const encoded = base642base64url(
-        Buffer.from(algosdk.encodeUnsignedTransaction(firstTxn)).toString(
-          "base64",
-        ),
-      );
-      router.push(`/sign/${senderAddr}/${encoded}`);
     }
   } catch (err) {
     console.error("redirectToARC200Payment.error", err);
