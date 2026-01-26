@@ -47,7 +47,7 @@ interface MultisigPayload {
 
 export interface SignerState {
   signed: Record<string, Uint8Array>;
-  toSign: Record<string, unknown>;
+  toSign: Record<string, unknown> | undefined;
   toSignArray: unknown[];
   returnTo: string;
   returnToSignAll: string;
@@ -70,10 +70,10 @@ const ensureEnv = (rootState: RootState): string => {
 const ensureAccount = (
   rootState: RootState,
   address: string,
-  missingMessage: string = missingAccountMessage
+  missingMessage: string = missingAccountMessage,
 ): PrivateAccount => {
   const account = rootState.wallet.privateAccounts.find(
-    (item) => item.addr === address
+    (item) => item.addr === address,
   );
   if (!account) {
     throw new Error(missingMessage);
@@ -85,7 +85,7 @@ const resolveEnvRekey = (
   rootState: RootState,
   account: PrivateAccount,
   env: string,
-  originalAddress: string
+  originalAddress: string,
 ): PrivateAccount => {
   const envRekey = account.data?.[env]?.rekeyedTo;
   if (typeof envRekey === "string" && envRekey !== originalAddress) {
@@ -99,7 +99,7 @@ const decodeMultisigTxn = (msigTx: Uint8Array) =>
 
 const state = (): SignerState => ({
   signed: {},
-  toSign: {},
+  toSign: undefined,
   toSignArray: [],
   returnTo: "",
   returnToSignAll: "",
@@ -124,12 +124,19 @@ const mutations: MutationTree<SignerState> = {
   returnToSignAll(currentState, returnToSignAll: string) {
     currentState.returnToSignAll = returnToSignAll;
   },
+
+  clearToSign(currentState) {
+    currentState.toSign = undefined;
+  },
 };
 
 const actions: ActionTree<SignerState, RootState> = {
+  async clearToSign({ commit }) {
+    commit("clearToSign");
+  },
   async signTransaction(
     { dispatch, rootState },
-    payload: SignTransactionPayload
+    payload: SignTransactionPayload,
   ): Promise<undefined | Uint8Array<ArrayBufferLike>> {
     try {
       const env = ensureEnv(rootState);
@@ -138,7 +145,7 @@ const actions: ActionTree<SignerState, RootState> = {
         rootState,
         baseAccount,
         env,
-        payload.from
+        payload.from,
       );
       if (signerAccount.type === "ledger") {
         return await dispatch("signByLedger", {
@@ -164,7 +171,7 @@ const actions: ActionTree<SignerState, RootState> = {
         }
         const msigTx = algosdk.createMultisigTransaction(
           payload.tx,
-          signerAccount.params
+          signerAccount.params,
         );
         return await dispatch("signMultisig", {
           msigTx,
@@ -205,7 +212,7 @@ const actions: ActionTree<SignerState, RootState> = {
   },
   getSignerType(
     { dispatch, rootState },
-    { from }: { from: string }
+    { from }: { from: string },
   ): "ledger" | "msig" | "sk" | "?" {
     try {
       const env = ensureEnv(rootState);
@@ -214,7 +221,7 @@ const actions: ActionTree<SignerState, RootState> = {
         rootState,
         baseAccount,
         env,
-        from
+        from,
       );
       if (resolvedAccount.type === "ledger") {
         return "ledger";
@@ -239,7 +246,7 @@ const actions: ActionTree<SignerState, RootState> = {
   },
   async signByLedger(
     { commit, rootState },
-    payload: SignByPayload
+    payload: SignByPayload,
   ): Promise<Uint8Array<ArrayBufferLike>> {
     const fromAccount = ensureAccount(rootState, payload.from);
     const transport = await TransportWebUSB.request();
@@ -247,7 +254,7 @@ const actions: ActionTree<SignerState, RootState> = {
     const slot = fromAccount.slot ?? 0;
     const { signature } = await algo.sign(
       `44'/283'/${slot}'/0/0`,
-      Buffer.from(payload.tx.toByte()).toString("hex")
+      Buffer.from(payload.tx.toByte()).toString("hex"),
     );
     if (!signature) {
       throw new Error("Ledger signature missing");
@@ -262,7 +269,7 @@ const actions: ActionTree<SignerState, RootState> = {
   },
   async signByWC1(
     { commit, rootState },
-    payload: SignByPayload
+    payload: SignByPayload,
   ): Promise<Uint8Array<ArrayBufferLike>> {
     const fromAccount = ensureAccount(rootState, payload.from);
     const connector = new WalletConnect({
@@ -277,7 +284,7 @@ const actions: ActionTree<SignerState, RootState> = {
         [
           {
             txn: Buffer.from(
-              algosdk.encodeUnsignedTransaction(payload.tx)
+              algosdk.encodeUnsignedTransaction(payload.tx),
             ).toString("base64"),
             authAddr: payload.from,
           },
@@ -291,7 +298,7 @@ const actions: ActionTree<SignerState, RootState> = {
   },
   async signByWC2(
     { dispatch, commit },
-    payload: SignByPayload
+    payload: SignByPayload,
   ): Promise<Uint8Array<ArrayBufferLike>> {
     const provider = (await dispatch("wcClient/init", null, {
       root: true,
@@ -305,7 +312,7 @@ const actions: ActionTree<SignerState, RootState> = {
         [
           {
             txn: Buffer.from(
-              algosdk.encodeUnsignedTransaction(payload.tx)
+              algosdk.encodeUnsignedTransaction(payload.tx),
             ).toString("base64"),
             authAddr: payload.from,
           },
@@ -314,7 +321,7 @@ const actions: ActionTree<SignerState, RootState> = {
     };
     const response = (await provider.request(
       request,
-      `algorand:${currentChain}`
+      `algorand:${currentChain}`,
     )) as string[];
     if (!response) {
       throw new Error("Transaction has not been signed");
@@ -325,12 +332,12 @@ const actions: ActionTree<SignerState, RootState> = {
   },
   async signBySk(
     { dispatch, commit },
-    payload: SignByPayload
+    payload: SignByPayload,
   ): Promise<Uint8Array<ArrayBufferLike>> {
     const sk: Uint8Array | null = await dispatch(
       "wallet/getSK",
       { addr: payload.from },
-      { root: true }
+      { root: true },
     );
     if (!sk) {
       throw new Error("Private key not found");
@@ -341,7 +348,7 @@ const actions: ActionTree<SignerState, RootState> = {
   },
   async createMultisigTransaction(
     { rootState },
-    { txn }: { txn: algosdk.Transaction }
+    { txn }: { txn: algosdk.Transaction },
   ) {
     if (!txn || !txn.sender?.publicKey) {
       throw new Error("Transaction object is not correct");
@@ -357,7 +364,7 @@ const actions: ActionTree<SignerState, RootState> = {
   },
   async signMultisig(
     { dispatch, rootState },
-    payload: MultisigPayload
+    payload: MultisigPayload,
   ): Promise<Uint8Array<ArrayBufferLike>> {
     const signatorAccount = ensureAccount(rootState, payload.signator);
     if (signatorAccount.type === "ledger") {
@@ -373,7 +380,7 @@ const actions: ActionTree<SignerState, RootState> = {
   },
   async signMultisigBySk(
     { commit, rootState },
-    payload: MultisigPayload
+    payload: MultisigPayload,
   ): Promise<Uint8Array<ArrayBufferLike>> {
     if (!payload.txn) {
       throw new Error("Txn cannot be empty");
@@ -386,7 +393,7 @@ const actions: ActionTree<SignerState, RootState> = {
       fromAccount = ensureAccount(
         rootState,
         fromAccount.rekeyedTo,
-        missingRekeyMessage
+        missingRekeyMessage,
       );
     }
     const rawSk = signatorAccount.sk;
@@ -397,7 +404,7 @@ const actions: ActionTree<SignerState, RootState> = {
       rawSk instanceof Uint8Array
         ? rawSk
         : new Uint8Array(
-            Buffer.from(Object.values(rawSk as Record<string, number>))
+            Buffer.from(Object.values(rawSk as Record<string, number>)),
           );
     const sigInnerTx = algosdk.signTransaction(payload.txn, skBytes);
     const sigInnerTxObj = algosdk.decodeSignedTransaction(sigInnerTx.blob);
@@ -411,7 +418,7 @@ const actions: ActionTree<SignerState, RootState> = {
     });
     if (!keyExist) {
       throw new Error(
-        `Multisig key is missing for address ${payload.signator}`
+        `Multisig key is missing for address ${payload.signator}`,
       );
     }
     const ret = algosdk.encodeObj(signedTxn);
@@ -420,11 +427,11 @@ const actions: ActionTree<SignerState, RootState> = {
   },
   async signMultisigByLedger(
     { dispatch, commit },
-    payload: MultisigPayload
+    payload: MultisigPayload,
   ): Promise<Uint8Array<ArrayBufferLike>> {
     const signedTxn = decodeMultisigTxn(payload.msigTx);
     const txn = algosdk.decodeUnsignedTransaction(
-      algosdk.encodeObj(signedTxn.txn)
+      algosdk.encodeObj(signedTxn.txn),
     );
     const sigInnerTx = await dispatch("signByLedger", {
       from: payload.signator,
@@ -441,7 +448,7 @@ const actions: ActionTree<SignerState, RootState> = {
     });
     if (!keyExist) {
       throw new Error(
-        `Multisig key is missing for address ${payload.signator}`
+        `Multisig key is missing for address ${payload.signator}`,
       );
     }
     const ret = algosdk.encodeObj(signedTxn);
@@ -450,11 +457,11 @@ const actions: ActionTree<SignerState, RootState> = {
   },
   async signMultisigByWC(
     { dispatch, commit, rootState },
-    payload: MultisigPayload
+    payload: MultisigPayload,
   ): Promise<Uint8Array<ArrayBufferLike>> {
     const signedTxn = decodeMultisigTxn(payload.msigTx);
     const txn = algosdk.decodeUnsignedTransaction(
-      algosdk.encodeObj(signedTxn.txn)
+      algosdk.encodeObj(signedTxn.txn),
     );
     const signatorAccount = ensureAccount(rootState, payload.signator);
     let sigInnerTx: Uint8Array;
@@ -480,7 +487,7 @@ const actions: ActionTree<SignerState, RootState> = {
     });
     if (!keyExist) {
       throw new Error(
-        `Multisig key is missing for address ${payload.signator}`
+        `Multisig key is missing for address ${payload.signator}`,
       );
     }
     const ret = algosdk.encodeObj(signedTxn);

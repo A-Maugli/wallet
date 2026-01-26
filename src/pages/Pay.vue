@@ -24,6 +24,16 @@
             <Message severity="error" v-if="isRekey" class="my-2">
               {{ t("pay.rekey_warning") }}
             </Message>
+
+            <Message
+              v-if="store.state.signer.toSign"
+              @close="removeSignerToSign"
+            >
+              Loaded information from transaction to sign. Close this to remove
+              tx from cache.
+              {{ store.state.signer.toSign }}
+            </Message>
+
             <p>{{ t("pay.selected_account") }}: {{ account.addr }}</p>
             <div v-if="isMultisig && !subpage">
               <h2>{{ t("pay.multisig_account") }}</h2>
@@ -418,7 +428,7 @@ const instance = getCurrentInstance();
 type CurrencyFormatter = (
   amount: number | bigint,
   symbol: string,
-  decimals: number
+  decimals: number,
 ) => string;
 
 type GlobalFilters = {
@@ -431,7 +441,7 @@ const filters = instance?.appContext.config.globalProperties.$filters as
 const formatCurrency = (
   amount: number | bigint,
   symbol: string,
-  decimalsCount: number
+  decimalsCount: number,
 ): string => {
   if (typeof filters?.formatCurrency === "function") {
     return filters.formatCurrency(amount, symbol, decimalsCount);
@@ -443,7 +453,7 @@ const toErrorMessage = (err: unknown): string =>
   err instanceof Error ? err.message : String(err);
 
 const toSingleParam = (
-  value: string | string[] | undefined
+  value: string | string[] | undefined,
 ): string | undefined => {
   if (Array.isArray(value)) {
     return value[0];
@@ -537,12 +547,12 @@ const signerToSignArray = (payload: Record<string, unknown>) =>
 const tokenSymbol = computed(() => store.state.config.tokenSymbol);
 const envName = computed(() => store.state.config.env);
 const walletAccounts = computed<WalletAccount[]>(
-  () => store.state.wallet.privateAccounts || []
+  () => store.state.wallet.privateAccounts || [],
 );
 const assetData = computed<ExtendedStoredAsset | undefined>(() => {
   const assetId = state.asset;
   return state.assets.find(
-    (entry) => String(entry.assetId) === String(assetId)
+    (entry) => String(entry.assetId) === String(assetId),
   );
 });
 
@@ -572,31 +582,31 @@ const decimals = computed(() => {
 });
 const decimalsPower = computed(() => Math.pow(10, decimals.value ?? 6));
 const amountLong = computed(() =>
-  Math.round(state.payamount * decimalsPower.value)
+  Math.round(state.payamount * decimalsPower.value),
 );
 const feeLong = computed(() => state.fee * Math.pow(10, 6));
 const payFrom = computed(() => {
   const accountParam = toSingleParam(
-    route.params.account as string | string[] | undefined
+    route.params.account as string | string[] | undefined,
   );
   return accountParam ?? state.payFromDirect;
 });
 const account = computed(() =>
-  walletAccounts.value.find((a) => a.addr == payFrom.value)
+  walletAccounts.value.find((a) => a.addr == payFrom.value),
 );
 const accountData = computed<AccountNetworkData | null>(
-  () => account.value?.data?.[envName.value] ?? null
+  () => account.value?.data?.[envName.value] ?? null,
 );
 const rekeyedToInfo = computed(() => {
   if (!accountData.value) return undefined;
   return walletAccounts.value.find(
-    (a) => a.addr == accountData.value?.rekeyedTo
+    (a) => a.addr == accountData.value?.rekeyedTo,
   );
 });
 const rekeyedMultisigParams = computed(() => {
   if (!accountData.value?.rekeyedTo) return undefined;
   const rekeyedInfo = walletAccounts.value.find(
-    (a) => a.addr == accountData.value?.rekeyedTo
+    (a) => a.addr == accountData.value?.rekeyedTo,
   );
   return rekeyedInfo?.params;
 });
@@ -612,22 +622,22 @@ const accountFor2FA = computed(() => {
     (a): a is WalletAccount & { addr: string } =>
       typeof a.addr === "string" &&
       params.addrs.includes(a.addr) &&
-      a.type == "2faApi"
+      a.type == "2faApi",
   );
 });
 const accountFor2FAAddr = computed(() => accountFor2FA.value?.addr ?? "");
 const accountFor2FAProvider = computed(
-  () => accountFor2FA.value?.twoFactorAuthProvider ?? ""
+  () => accountFor2FA.value?.twoFactorAuthProvider ?? "",
 );
 const showDesignScreen = computed(
-  () => !isMultisig.value || (isMultisig.value && state.subpage == "proposal")
+  () => !isMultisig.value || (isMultisig.value && state.subpage == "proposal"),
 );
 const isRekey = computed(() => {
   if (state.multisigDecoded?.txn && state.multisigDecoded.txn.rekeyTo) {
     return true;
   }
   const typeParam = toSingleParam(
-    route.params.type as string | string[] | undefined
+    route.params.type as string | string[] | undefined,
   );
   return typeParam === "rekey";
 });
@@ -650,7 +660,7 @@ const maxAmount = computed(() => {
 });
 const payamountGtMaxAmount = computed(() => state.payamount > maxAmount.value);
 const forcedAssetNotLoaded = computed(
-  () => state.forceAsset && (!state.assetObj || !state.assetObj.name)
+  () => state.forceAsset && (!state.assetObj || !state.assetObj.name),
 );
 const stepAmount = computed(() => {
   if (!decimals.value) return 1;
@@ -673,6 +683,11 @@ const isNotValid = computed(() => {
 
 watch(payFromDirect, (value) => {
   if (value) {
+    console.log(
+      "setting last active account to: payFromDirect",
+      payFromDirect,
+      value,
+    );
     lastActiveAccount({ addr: value });
   }
 });
@@ -704,6 +719,7 @@ watch(asset, async (assetValue) => {
 watch(isAuth, (auth) => {
   if (
     auth &&
+    !store.state.wallet.lastActiveAccount &&
     store.state.wallet.privateAccounts &&
     store.state.wallet.privateAccounts.length === 1
   ) {
@@ -719,7 +735,7 @@ onMounted(async () => {
   state.payTo = store.state.wallet.lastPayTo || "";
 
   const assetParam = toSingleParam(
-    route.params.asset as string | string[] | undefined
+    route.params.asset as string | string[] | undefined,
   );
   if (assetParam) {
     state.asset = assetParam;
@@ -727,7 +743,7 @@ onMounted(async () => {
 
   parseToAccount();
   const toAccountDirect = toSingleParam(
-    route.params.toAccountDirect as string | string[] | undefined
+    route.params.toAccountDirect as string | string[] | undefined,
   );
   if (toAccountDirect) {
     state.payTo = toAccountDirect;
@@ -740,6 +756,7 @@ onMounted(async () => {
         state.payTo = algosdk.encodeAddress(state.txn.to.publicKey);
       }
       if (state.txn?.from) {
+        console.log("setting payFromDirect from txn.from", state.txn.from);
         state.payFromDirect = algosdk.encodeAddress(state.txn.from.publicKey);
       }
 
@@ -753,7 +770,7 @@ onMounted(async () => {
       state.rawSignedTxnInput = encodedTxn;
 
       state.multisigDecoded = algosdk.decodeSignedTransaction(
-        base64ToArrayBuffer(state.rawSignedTxnInput)
+        base64ToArrayBuffer(state.rawSignedTxnInput),
       );
       state.note = state.txn?.note ?? null;
       if (state.txn?.assetIndex !== undefined) {
@@ -768,7 +785,7 @@ onMounted(async () => {
     }
   }
   const rawSignedTxnParam = toSingleParam(
-    route.params.rawSignedTxnInput as string | string[] | undefined
+    route.params.rawSignedTxnInput as string | string[] | undefined,
   );
   if (rawSignedTxnParam) {
     try {
@@ -791,17 +808,23 @@ onMounted(async () => {
     }
   }
   const accountParam = toSingleParam(
-    route.params.account as string | string[] | undefined
+    route.params.account as string | string[] | undefined,
   );
   if (accountParam) {
+    console.log("setting last active account to: accountParam", accountParam);
     await lastActiveAccount({ addr: accountParam });
   }
   await makeAssets();
 
   if (
+    !store.state.wallet.lastActiveAccount &&
     store.state.wallet.privateAccounts &&
     store.state.wallet.privateAccounts.length === 1
   ) {
+    console.log(
+      "setting payFromDirect from single account wallet",
+      store.state.wallet.privateAccounts[0].addr,
+    );
     state.payFromDirect = store.state.wallet.privateAccounts[0].addr || "";
   }
 
@@ -809,7 +832,13 @@ onMounted(async () => {
     state.payTo = accountData.value.addr;
   }
   if (state.payTo && !state.payFromDirect) {
-    state.payFromDirect = state.payTo;
+    if (store.state.wallet.lastActiveAccount) {
+      console.log("setting payFromDirect from lastActiveAccount", state.payTo);
+      state.payFromDirect = store.state.wallet.lastActiveAccount;
+    } else {
+      console.log("setting payFromDirect from payTo", state.payTo);
+      state.payFromDirect = state.payTo;
+    }
   }
 
   if (accountFor2FAProvider.value) {
@@ -874,7 +903,7 @@ const makeAssets = async () => {
           const balance = formatCurrency(
             Number(accountAsset["amount"] ?? 0),
             assetInfo.unitName ? assetInfo.unitName : assetInfo.name ?? "",
-            assetInfo.decimals ?? 6
+            assetInfo.decimals ?? 6,
           );
           state.assets.push({
             assetId: BigInt(accountAsset.assetId),
@@ -898,7 +927,7 @@ const makeAssets = async () => {
         const balance = formatCurrency(
           Number(accountAsset.balance ?? 0),
           accountAsset.symbol ? accountAsset.symbol : accountAsset.name,
-          Number(accountAsset.decimals ?? 0)
+          Number(accountAsset.decimals ?? 0),
         );
         state.assets.push({
           assetId: BigInt(accountAsset.arc200id),
@@ -914,7 +943,7 @@ const makeAssets = async () => {
   }
 
   const toAccountParam = toSingleParam(
-    route.params.toAccount as string | string[] | undefined
+    route.params.toAccount as string | string[] | undefined,
   );
   if (toAccountParam) {
     parseToAccount(toAccountParam);
@@ -950,7 +979,7 @@ const parseToAccount = (encodedValue?: string) => {
 const previewPaymentClick = async (e: Event | undefined) => {
   try {
     const assetMeta = state.assets.find(
-      (a) => BigInt(a.assetId) == BigInt(state.asset)
+      (a) => BigInt(a.assetId) == BigInt(state.asset),
     );
     if (!assetMeta) {
       console.error("no asset selected");
@@ -1034,7 +1063,7 @@ const accountIsOptedInToArc200Asset = async (addr: string) => {
   const indexerClient = await getIndexer();
   const fromDecoded = algosdk.decodeAddress(addr);
   const boxName = new Uint8Array(
-    Buffer.concat([Buffer.from([0x00]), Buffer.from(fromDecoded.publicKey)])
+    Buffer.concat([Buffer.from([0x00]), Buffer.from(fromDecoded.publicKey)]),
   );
   const appId = numericSelectedAssetId.value;
   if (!appId) {
@@ -1075,7 +1104,7 @@ const redirectToARC200Payment = async () => {
       // : algosdk.BoxReference
       appId: BigInt(appId),
       name: new Uint8Array(
-        Buffer.from(algosdk.decodeAddress(senderAddr).publicKey)
+        Buffer.from(algosdk.decodeAddress(senderAddr).publicKey),
       ),
     };
     var boxFrom: BoxReference = {
@@ -1085,7 +1114,7 @@ const redirectToARC200Payment = async () => {
         Buffer.concat([
           Buffer.from([0x00]),
           Buffer.from(algosdk.decodeAddress(senderAddr).publicKey),
-        ])
+        ]),
       ), // data box
     };
     var boxTo: BoxReference = {
@@ -1095,7 +1124,7 @@ const redirectToARC200Payment = async () => {
         Buffer.concat([
           Buffer.from([0x00]),
           Buffer.from(algosdk.decodeAddress(state.payTo).publicKey),
-        ])
+        ]),
       ), // data box
     };
     var boxFromBalance: BoxReference = {
@@ -1105,7 +1134,7 @@ const redirectToARC200Payment = async () => {
         Buffer.concat([
           Buffer.from("balances", "ascii"),
           Buffer.from(algosdk.decodeAddress(senderAddr).publicKey),
-        ])
+        ]),
       ), // data box
     };
     var boxToBalance: BoxReference = {
@@ -1115,7 +1144,7 @@ const redirectToARC200Payment = async () => {
         Buffer.concat([
           Buffer.from("balances", "ascii"),
           Buffer.from(algosdk.decodeAddress(state.payTo).publicKey),
-        ])
+        ]),
       ), // data box
     };
     var boxFromAddrText: BoxReference = {
@@ -1163,8 +1192,8 @@ const redirectToARC200Payment = async () => {
       state.tx = firstTxn;
       const encoded = base642base64url(
         Buffer.from(algosdk.encodeUnsignedTransaction(firstTxn)).toString(
-          "base64"
-        )
+          "base64",
+        ),
       );
       router.push(`/sign/${senderAddr}/${encoded}`);
     }
@@ -1200,7 +1229,7 @@ const base64url2base64 = (input: string) => {
   if (pad) {
     if (pad === 1) {
       throw new Error(
-        "InvalidLengthError: Input base64url string is the wrong length to determine padding"
+        "InvalidLengthError: Input base64url string is the wrong length to determine padding",
       );
     }
     output += "=".repeat(4 - pad);
@@ -1219,13 +1248,13 @@ const loadMultisig = (e: Event | undefined) => {
   if (!state.rawSignedTxnInput) return;
   const senderAddr = requirePayFrom();
   state.multisigDecoded = algosdk.decodeSignedTransaction(
-    base64ToArrayBuffer(state.rawSignedTxnInput)
+    base64ToArrayBuffer(state.rawSignedTxnInput),
   );
   state.txn = state.multisigDecoded.txn;
   state.rawSignedTxn = state.rawSignedTxnInput;
 
   router.push(
-    `/sign/${senderAddr}/` + base642base64url(state.rawSignedTxnInput)
+    `/sign/${senderAddr}/` + base642base64url(state.rawSignedTxnInput),
   );
 
   state.page = "review";
@@ -1366,5 +1395,10 @@ const loadAuthToken = () => {
   if (!token) return false;
   state.accountFor2FAAuthToken = token;
   return true;
+};
+
+const removeSignerToSign = async () => {
+  await prolong();
+  store.commit("signer/clearToSign");
 };
 </script>
