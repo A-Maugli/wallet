@@ -78,7 +78,7 @@ const formatGenesisHash = (genesisHash?: Uint8Array | number[]) => {
 };
 
 const encodeAddress = (
-  addr?: algosdk.Address | { publicKey: Uint8Array } | string
+  addr?: algosdk.Address | { publicKey: Uint8Array } | string,
 ) => {
   if (!addr) return "-";
   if (typeof addr === "string") return addr;
@@ -154,8 +154,8 @@ const clickSign = async (data: TransactionTableEntry) => {
     await store.dispatch("signer/toSign", { tx: data.txn });
     const encoded = base642base64url(
       Buffer.from(algosdk.encodeUnsignedTransaction(data.txn)).toString(
-        "base64"
-      )
+        "base64",
+      ),
     );
     router.push(`/sign/${data.from}/${encoded}`);
   } else {
@@ -182,7 +182,7 @@ const isASCIIText = (str: string) => {
 };
 const formatData = (
   arg: Uint8Array | number[] | undefined,
-  type: "Text" | "UInt" | "Hex" | "B64"
+  type: "Text" | "UInt" | "Hex" | "B64",
 ) => {
   try {
     if (!arg) return "";
@@ -282,7 +282,7 @@ const submitSignedClick = async () => {
       state.confirmedRound = confirmation.confirmedRound;
       store.dispatch(
         "toast/openSuccess",
-        `${t("sign_all.transaction_confirmed")} ${state.confirmedRound}`
+        `${t("sign_all.transaction_confirmed")} ${state.confirmedRound}`,
       );
     }
     if (confirmation.poolError) {
@@ -409,7 +409,7 @@ const getAssetDecimals = (id: number) => {
                   v-if="slotProps.data.txn['type'] == 'pay'"
                   class="text-end"
                 >
-                  {{ formatCurrency(slotProps.data.txn["amount"]) }}
+                  {{ formatCurrency(slotProps.data.txn.payment?.amount) }}
                 </div>
                 <div
                   v-else-if="slotProps.data.txn['type'] == 'axfer'"
@@ -417,9 +417,13 @@ const getAssetDecimals = (id: number) => {
                 >
                   {{
                     formatCurrency(
-                      slotProps.data.txn["amount"],
-                      getAssetName(slotProps.data.txn["assetIndex"]),
-                      getAssetDecimals(slotProps.data.txn["assetIndex"])
+                      slotProps.data.txn.assetTransfer?.amount,
+                      getAssetName(
+                        Number(slotProps.data.txn.assetTransfer?.assetIndex),
+                      ),
+                      getAssetDecimals(
+                        Number(slotProps.data.txn.assetTransfer?.assetIndex),
+                      ),
                     )
                   }}
                 </div>
@@ -455,10 +459,10 @@ const getAssetDecimals = (id: number) => {
                   <tr>
                     <td>{{ t("connect.validity") }}:</td>
                     <td>
-                      {{ txProps.data.txn.firstRound }} -
-                      {{ txProps.data.txn.lastRound }} ({{
-                        txProps.data.txn.lastRound -
-                        txProps.data.txn.firstRound +
+                      {{ Number(txProps.data.txn.firstValid) }} -
+                      {{ Number(txProps.data.txn.lastValid) }} ({{
+                        Number(txProps.data.txn.lastValid) -
+                        Number(txProps.data.txn.firstValid) +
                         1
                       }}
                       {{ t("connect.rounds") }})
@@ -499,12 +503,15 @@ const getAssetDecimals = (id: number) => {
 
                   <tr v-if="txProps.data.type == 'appl'">
                     <td>{{ t("connect.app") }}:</td>
-                    <td>{{ txProps.data.txn.appIndex }}</td>
+                    <td>
+                      {{ Number(txProps.data.txn.applicationCall?.appIndex) }}
+                    </td>
                   </tr>
 
                   <tr
                     v-if="
-                      txProps.data.type == 'appl' && txProps.data.txn.appArgs
+                      txProps.data.type == 'appl' &&
+                      txProps.data.txn.applicationCall?.appArgs
                     "
                   >
                     <td>{{ t("connect.app_args") }}:</td>
@@ -512,7 +519,8 @@ const getAssetDecimals = (id: number) => {
                       <table>
                         <tbody>
                           <tr
-                            v-for="(arg, index) in txProps.data.txn.appArgs"
+                            v-for="(arg, index) in txProps.data.txn
+                              .applicationCall.appArgs"
                             :key="arg"
                           >
                             <td>{{ Number(index) + 1 }}.</td>
@@ -528,14 +536,15 @@ const getAssetDecimals = (id: number) => {
                   <tr
                     v-if="
                       txProps.data.type == 'appl' &&
-                      txProps.data.txn.appAccounts
+                      txProps.data.txn.applicationCall?.accounts
                     "
                   >
                     <td>{{ t("connect.app_accounts") }}:</td>
                     <td>
                       <ol>
                         <li
-                          v-for="acc in txProps.data.txn.appAccounts"
+                          v-for="acc in txProps.data.txn.applicationCall
+                            .accounts"
                           :key="acc"
                         >
                           {{ formatAppAccount(acc) }}
@@ -547,32 +556,36 @@ const getAssetDecimals = (id: number) => {
                   <tr
                     v-if="
                       txProps.data.type == 'appl' &&
-                      txProps.data.txn.appForeignAssets
+                      txProps.data.txn.applicationCall?.foreignAssets
                     "
                   >
                     <td>{{ t("connect.app_assets") }}:</td>
                     <td>
                       <ol>
                         <li
-                          v-for="asset in txProps.data.txn.appForeignAssets"
+                          v-for="asset in txProps.data.txn.applicationCall
+                            .foreignAssets"
                           :key="asset"
                         >
-                          {{ asset }}
+                          {{ Number(asset) }}
                         </li>
                       </ol>
                     </td>
                   </tr>
                   <tr
-                    v-if="txProps.data.type == 'appl' && txProps.data.txn.boxes"
+                    v-if="
+                      txProps.data.type == 'appl' &&
+                      txProps.data.txn.applicationCall?.boxes
+                    "
                   >
                     <td>{{ t("connect.boxes") }}:</td>
                     <td>
                       <ol>
                         <li
-                          v-for="box in txProps.data.txn.boxes"
+                          v-for="box in txProps.data.txn.applicationCall.boxes"
                           :key="box.name"
                         >
-                          {{ t("connect.app") }}: {{ box.appIndex }},
+                          {{ t("connect.app") }}: {{ Number(box.appIndex) }},
                           {{ t("connect.name") }}:
                           {{ box.name }}
                         </li>
