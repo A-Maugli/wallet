@@ -50,7 +50,7 @@ const fetchAsset = async () => {
       "TESTNTTTJDHIF5PJZUBTTDYYSKLCLM6KXCTWIOOTZJX5HO7263DPPMM2SU";
     const dummyTransactionSigner = async (
       txnGroup: algosdk.Transaction[],
-      indexesToSign: number[]
+      indexesToSign: number[],
     ): Promise<Uint8Array[]> => {
       console.log("transactionSigner", txnGroup, indexesToSign);
       return [] as Uint8Array[];
@@ -87,7 +87,7 @@ const fetchAsset = async () => {
       state.loading = false;
       store.dispatch(
         "toast/openError",
-        `Failed to fetch ARC200 name at network ${store.state.config.envName}. Asset does not exist, or you have problem with internet, or you are using wrong network.`
+        `Failed to fetch ARC200 name at network ${store.state.config.envName}. Asset does not exist, or you have problem with internet, or you are using wrong network.`,
       );
       return;
     }
@@ -102,7 +102,7 @@ const fetchAsset = async () => {
       state.loading = false;
       store.dispatch(
         "toast/openError",
-        `Failed to fetch ARC200 symbol at network ${store.state.config.envName}. You have problem with internet, or asset does not exist, or you are using wrong network.`
+        `Failed to fetch ARC200 symbol at network ${store.state.config.envName}. You have problem with internet, or asset does not exist, or you are using wrong network.`,
       );
       return;
     }
@@ -115,7 +115,7 @@ const fetchAsset = async () => {
       state.loading = false;
       store.dispatch(
         "toast/openError",
-        `Failed to fetch ARC200 decimals at network ${store.state.config.envName}. You have problem with internet, or asset does not exist, or you are using wrong network.`
+        `Failed to fetch ARC200 decimals at network ${store.state.config.envName}. You have problem with internet, or asset does not exist, or you are using wrong network.`,
       );
       return;
     }
@@ -128,7 +128,7 @@ const fetchAsset = async () => {
       state.loading = false;
       store.dispatch(
         "toast/openError",
-        `Failed to fetch ARC200 totalSupply at network ${store.state.config.envName}. You have problem with internet, or asset does not exist, or you are using wrong network.`
+        `Failed to fetch ARC200 totalSupply at network ${store.state.config.envName}. You have problem with internet, or asset does not exist, or you are using wrong network.`,
       );
       return;
     }
@@ -144,7 +144,7 @@ const fetchAsset = async () => {
       state.loading = false;
       store.dispatch(
         "toast/openError",
-        `Failed to fetch ARC200 balance at network ${store.state.config.envName}. You have problem with internet, or asset does not exist, or you are using wrong network.`
+        `Failed to fetch ARC200 balance at network ${store.state.config.envName}. You have problem with internet, or asset does not exist, or you are using wrong network.`,
       );
       return;
     }
@@ -153,7 +153,7 @@ const fetchAsset = async () => {
 
     state.arc200Info.arc200id = Number(state.arc200id);
     state.boxNotFound = !(await accountIsOptedInToArc200Asset(
-      state.account.addr
+      state.account.addr,
     ));
 
     state.loading = false;
@@ -170,7 +170,7 @@ const accountIsOptedInToArc200Asset = async (addr: string) => {
   const indexerClient = await store.dispatch("indexer/getIndexer");
   const fromDecoded = algosdk.decodeAddress(addr);
   const boxName = new Uint8Array(
-    Buffer.concat([Buffer.from([0x00]), Buffer.from(fromDecoded.publicKey)])
+    Buffer.concat([Buffer.from([0x00]), Buffer.from(fromDecoded.publicKey)]),
   );
   try {
     await indexerClient
@@ -192,7 +192,10 @@ const save = async () => {
       addr: state.account.addr,
       arc200Info: state.arc200Info,
     });
-    router.push({ name: "Accounts" });
+    router.push({
+      name: "AccountAssets",
+      params: { account: state.account.addr },
+    });
   } catch (err: any) {
     const error = err.message ?? err;
     console.error("failed to addArc200Asset", error, err);
@@ -206,7 +209,7 @@ const makeOptInTxs = async () => {
   const appId = Number(state.arc200Info.arc200id);
   const dummyTransactionSigner = async (
     txnGroup: algosdk.Transaction[],
-    indexesToSign: number[]
+    indexesToSign: number[],
   ): Promise<Uint8Array[]> => {
     console.log("transactionSigner", txnGroup, indexesToSign);
     return [] as Uint8Array[];
@@ -234,7 +237,7 @@ const makeOptInTxs = async () => {
     // : algosdk.BoxReference
     appId: BigInt(appId),
     name: new Uint8Array(
-      Buffer.concat([Buffer.from([0x00]), Buffer.from(fromDecoded.publicKey)])
+      Buffer.concat([Buffer.from([0x00]), Buffer.from(fromDecoded.publicKey)]),
     ), // data box
   };
   var boxFromAddrText: BoxReference = {
@@ -432,7 +435,7 @@ const delay = (ms: any) => {
               formatCurrencyBigInt(
                 state.arc200Info.totalSupply,
                 state.arc200Info.symbol,
-                Number(state.arc200Info.decimals)
+                Number(state.arc200Info.decimals),
               )
             }}
           </div>
@@ -449,7 +452,7 @@ const delay = (ms: any) => {
               formatCurrencyBigInt(
                 state.arc200Info.balance,
                 state.arc200Info.symbol,
-                Number(state.arc200Info.decimals)
+                Number(state.arc200Info.decimals),
               )
             }}
           </div>
