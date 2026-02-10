@@ -4,7 +4,10 @@
     "text": "El sitio web que buscas no pudo ser encontrado."
   },
   "footer": {
-    "text": "Algo Wallet"
+    "text": "Algo Wallet",
+    "session_timeout_header": "Advertencia de tiempo de espera de sesión",
+    "session_timeout_message": "Su sesión expirará pronto. ¿Desea continuar?",
+    "session_timeout_continue": "Continuar sesión"
   },
   "login": {
     "new_wallet": "Nueva billetera",
@@ -27,6 +30,7 @@
     "go_back": "Retroceder",
     "go_home": "Inicio",
     "copy_address": "Copiar dirección",
+    "copied": "Copied",
     "copied_to_clipboard": "Copiado al porta papeles!",
     "stop_camera": "Detener cámara",
     "cancel": "Cancelar",
@@ -62,8 +66,9 @@
     "get_quote": "Cotizar (previsualizar el intercambio)",
     "apps_optin": "INTERCAMBIO require que su cuenta haga el Opt-in a la aplicación",
     "apps_optin_button": "Hacer Opt-in a la aplicación",
-    "execute_button_deflex": "Ejecutar usando Deflex",
+    "execute_button_deflex": "Ejecutar usando Haystack router",
     "execute_button_folks": "Ejecutar usando Folks router",
+    "execute_button_biatec": "Ejecutar usando Biatec router",
     "slippage": "Porcentaje de desviación"
   },
   "govtoolsmenu": {
@@ -192,7 +197,32 @@
     "arc14_help": "ARC 14 is authentication standard utilizing signed transactions. You can generate the authentication tokens on this page.",
     "account_actions": "Account actions",
     "asset_optinArc200": "OptIn to ARC200 asset",
-    "asset_optinArc200_help": "You can watch on your account the ARC200 assets. ARC200 assets are smart contracts with feature that anyone can opt in user's account to be able to receive the asset. ARC200 assets may be dangerous and you should require trustworthy audit of the smart contract so that you can fully trust it."
+    "asset_optinArc200_help": "You can watch on your account the ARC200 assets. ARC200 assets are smart contracts with feature that anyone can opt in user's account to be able to receive the asset. ARC200 assets may be dangerous and you should require trustworthy audit of the smart contract so that you can fully trust it.",
+    "scheduled_payment": "Scheduled payment",
+    "scheduled_payment_help": "You can setup and manage a scheduled periodic payments to another accounts",
+    "hide_account": "Hide account",
+    "unhide_account": "Unhide account",
+    "vote_first_round": "Vote First Round",
+    "vote_last_round": "Vote Last Round",
+    "vote_key_dilution": "Vote Key Dilution",
+    "selection_key": "Selection Key",
+    "vote_key": "Vote Key",
+    "stateproof_key": "StateProof Key",
+    "realm": "Realm",
+    "arc14msig_process": "Please sign ARC14 authentication transaction and return back to this form.",
+    "hasArc14": "ARC14 auth has been loaded.",
+    "generating_keys": "Generating participation keys.. Please be patient, the participation node is performing CPU sensitive task.",
+    "button_sign_keyreg": "Sign key registration tx",
+    "button_close_custom_keyreg": "Close KeyReg tx form",
+    "button_activate_wizzard": "Activate wizard",
+    "button_fetch_realm": "Step 1/4: Fetch ARC14 realm",
+    "button_sign_arc14": "Step 2/4: Sign ARC14 realm",
+    "button_sign_arc14_msig": "Step 2/4: Multisign ARC14 realm",
+    "button_load_participatin_data": "Step 3/4: Load participation data",
+    "button_sign_keyreg_tx": "Step 4/4: Sign participation tx",
+    "button_custom_keyreg": "Custom KeyReg tx",
+    "making_account_online": "Setting your account to online state. Please wait a while",
+    "making_account_offline": "Setting your account to offline state. Please wait a while"
   },
   "acc_overview_assets": {
     "name": "Name",
@@ -282,12 +312,12 @@
     "email_pass_account": "Cuenta de correo y contraseña",
     "shamir_account": "Shamir copia de seguridad de recuperación",
     "overview": "New account actions",
-    "create_basic_help": "Algorand basic account is ED25529 account with private key. This method uses your computer random number generator to create secret for your account.",
+    "create_basic_help": "Algorand basic account is ED25519 account with private key. This method uses your computer random number generator to create secret for your account.",
     "ledger_account_help": "One of most secure solutions is to handle the secret key generation by specialized device. This account utilizes Ledger device to create your account and handle the signing operations.",
     "wc_account_help": "You can connect to your friend's wallet using the wallet connect account type. You can send them request to sign the message for example as part of multisig.",
     "twofa_account_help": "Two factor account is multisig account, where one account is account of your choosing for example ledger account or email password account, second account is recovery account - ideally account which is not in the same secure storage, and third account is the two factor account from the server which signs transactions when you provide correct two factor pin code.",
     "email_pass_account_help": "ARC76 Email & Password account allows you to generate algorand account from any text. The text is hashed and generates 32 bytes as seed for your algorand account. This may be alternative to other types of random number generators in your computer or hw device which you can utilize in two factor account or generic multisig account.",
-    "create_vanity_help": "You can brute force nice account address for your ED25529 account. This method simply tries a lot of combinations of creating account and lets you pick first or last letters of the account address.",
+    "create_vanity_help": "You can brute force nice account address for your ED25519 account. This method simply tries a lot of combinations of creating account and lets you pick first or last letters of the account address.",
     "create_multisign_account_help": "Multisig accounts are the most secure accounts. If used in combination of multiple ledger devices and different random number generators, this provides enterprise level of security which is hardcoded directly to the algorand blockchain.",
     "watch_account_help": "You can track any account on the network.",
     "import_account_help": "You can recover the account from the algorand recovery mnemonic.",
@@ -295,7 +325,11 @@
     "create_first": "Create your first account",
     "no_accounts_at_network": "There are no accounts for selected network",
     "basic_options": "Basic options",
-    "advanced_options": "Advanced options"
+    "advanced_options": "Advanced options",
+    "skip_challange": "Skip challange",
+    "new_account_challange": "New account challange",
+    "click_to_show_positions": "Click to show positions",
+    "to": "to"
   },
   "arc76account": {
     "title": "Cuenta de correo y contraseña (ARC-0076)",
@@ -418,7 +452,8 @@
     "protocol_title": "Registrar controlador de protocolo",
     "protocol_button": "Registrar web+algorand:// controlador",
     "protocol_change_success": "Se ha actualizado correctamente el controlador de protocolor",
-    "dev_settings": "Mostrar información para desarrolladores"
+    "dev_settings": "Mostrar información para desarrolladores",
+    "update_password": "Actualizar contraseña"
   },
   "transaction": {
     "title": "Detalle de la transacción",
@@ -536,7 +571,6 @@
     "a8_3": "Seleccione todas las cuentas que pueden firmar las transacciones y seleccione cuántas firmas se necesitan mínimo para que la red acepte el pago multifirma.",
     "a8_4": "Una vez creada la cuenta multifirma, puede acceder a ella desde la página de la lista de cuentas."
   },
-
   "connect": {
     "title": "Conectar con las DApps mediante WalletConnect",
     "uri": "WalletConnect URI",
@@ -583,7 +617,9 @@
     "session_proposals": "Propuestas de sesión",
     "toggle_camera": "Cambiar de cámara",
     "init_wc": "Inicializar la conexión con WalletConnect",
-    "sign_all": "Firmar todo"
+    "sign_all": "Firmar todo",
+    "proposer": "Proposer",
+    "all_accounts": "Use all wallet accounts"
   },
   "new_account_wc": {
     "title": "Añadir cuenta WalletConnect",
@@ -616,7 +652,11 @@
     "warning": "Puede seleccionar el nodo de participación pública para verificar los bloques en la red. Usted generará nuevas claves de participación en el servidor algod público y firmará la transacción para permitir que estas claves de participación recopilen los datos de los bloques. Esto le costará como una transacción en la red (0,001 algo). El estado de cuenta en línea no significa que su clave privada esté expuesta a Internet. Significa que su cuenta está registrada en el nodo algod online que está protegiendo blockchain.",
     "makeOnline": "Volver la cuenta \"online\"",
     "makeOffline": "Volver la cuenta \"offline\"",
-    "host": "Algod anfitrión"
+    "host": "Algod anfitrión",
+    "fromclipboard": "Process data from clipboard",
+    "stakingRegistration": "Register for staking - 2A network fee",
+    "stakingHelp": "By paying 2 algorand now as network fee, and having more than 30k algos on your account, you are eligible to receive the staking rewards anytime the staking node mints new block.",
+    "onlineRounds": "Number of rounds to protect the network"
   },
   "new_account_shamir": {
     "header": "Copia de seguridad Shamir de recuperación",
@@ -658,5 +698,122 @@
     "is_opted_in": "Account can receive asset",
     "create_box": "Create box for this asset for this account",
     "save_action": "Save asset to your account"
+  },
+  "scheduled_payments": {
+    "title": "Scheduled payments management",
+    "description": "With decentralized scheduler you will deploy the smart contract - escrow account which will be used for purpose to allow any executor perform withdrawal from your escrow account to the destination account when the time comes. Executors are incentivized to execute your scheduled task with vision of receiving small fee paid in ASA.Gold token - 0.001 gram of gold.",
+    "new_scheduled_payment": "New scheduled payment",
+    "period": "Period",
+    "pay_to": "Pay to",
+    "send_asset": "Asset to send",
+    "create_escrow_account": "Create escrow account",
+    "list_of_payments": "List of active payments",
+    "no_payment_found": "No scheduled payments has been found",
+    "app_id": "Escrow app id",
+    "app_address": "Escrow app address",
+    "start": "Start",
+    "fee_balance": "Fee balance",
+    "execution_fee": "Execution fee",
+    "description_detail": "In this detail overview of the scheduled payment you can see the current asset balance of the escrow account and you have actions to deposit more assets to the escrow account or to executors.",
+    "details_title": "Scheduled payment details",
+    "seconds": "seconds",
+    "deposit_fee_title": "Deposit asa.gold token to fee pool smart contract",
+    "fee_asset_id": "Execution fee token",
+    "amount_to_deposit": "Amount to deposit to fees",
+    "get_more": "Get more tokenized gold",
+    "list_of_assets": "List of assets at escrow account",
+    "assets_loading": "Asset information is loading",
+    "asset_id": "Asset ID",
+    "asset_name": "Asset name",
+    "asset_amount": "Asset amount",
+    "deposit": "Deposit",
+    "optin_title": "Escrow account optin action",
+    "optin_to_asset": "Opt in to asset",
+    "optin_click": "Opt in",
+    "withdraw_asset_title": "Withdraw from escrow account",
+    "withdraw_asset": "Asset to withdraw",
+    "withdraw_amount": "Amount to withdraw",
+    "withdraw_click": "Execute withdrawal",
+    "load_script_title": "Load app execution profile",
+    "load_click": "Load",
+    "xgov_promo": "This work has been performed with support from the Algorand Foundation xGov Grants Program"
+  },
+  "donation": {
+    "title": "Por favor ayúdanos",
+    "project_intro": "Este proyecto fue iniciado en junio de 2021 como la primera cartera algorand de código abierto.",
+    "funding_received": "Gracias a gobernadores expertos, hemos recibido fondos para crear",
+    "twofa_accounts": "cuentas de autenticación de dos factores",
+    "and": "y",
+    "payment_scheduler": "programador de pagos",
+    "community_active": "Somos activos en la comunidad algorand. Hemos creado",
+    "algorand_directory": "Directorio Algorand",
+    "wallet_support": ", además del soporte de cartera, hemos creado la",
+    "payment_gateway": "pasarela de pago",
+    "no_middleman": "que no requiere intermediario financiero, hemos creado sistema de votación descentralizado de código abierto construido en la red algorand, y hemos construido el",
+    "donation_web": "web de donaciones",
+    "future_vision": "Tenemos varias visiones donde podemos ayudar a crecer a la comunidad algorand.",
+    "graphics_designer": "Nos gustaría contratar diseñador gráfico para mejorar la apariencia de AWallet. Esperamos costos de aproximadamente 1000 USDt.",
+    "donate_now": "Donar ahora",
+    "translation_cost": "La traducción a otro idioma cuesta aproximadamente 50 USD. Por favor envíanos en la nota información sobre a qué idioma te gustaría que AWallet fuera traducido.",
+    "magento_gateway": "Implementación de pasarela de pago para Magento - Sin intermediario, aceptas pagos en tu cuenta, empareja con facturas",
+    "accept_donations": "Aceptamos donaciones en esta cuenta:",
+    "thank_you": "Gracias",
+    "ludo_scholtz": "Ludo Scholtz",
+    "company_name": "Scholtz&Company, jsa"
+  },
+  "placeholders": {
+    "source_asset": "Activo origen",
+    "destination_asset": "Activo destino",
+    "service_realm": "Dominio de servicio. Por ejemplo 2FA#ARC14",
+    "keyword_search": "Búsqueda por palabra clave",
+    "search_by_asset_id": "Buscar por ID de activo",
+    "search_by_type": "Buscar por tipo",
+    "search_by_date": "Buscar por fecha",
+    "search_by_amount": "Buscar por cantidad",
+    "search_by_sender": "Buscar por remitente",
+    "search_by_receiver": "Buscar por receptor",
+    "search_by_fee": "Buscar por tarifa",
+    "search_by_round": "Buscar por ronda",
+    "search_by_name": "Buscar por nombre",
+    "search_by_address": "Buscar por dirección"
+  },
+  "buttons": {
+    "try_it_out": "Pruébalo",
+    "exchange_tokens": "⇅ Intercambiar tokens origen y destino"
+  },
+  "labels": {
+    "use_folks": "Usar Folks router",
+    "use_deflex": "Usar Haystack router",
+    "use_biatec": "Usar Biatec router",
+    "quote": "Cotización:",
+    "price": "Precio:"
+  },
+  "success": {
+    "payment_successful": "El pago ha sido exitoso",
+    "thank_you_payment": "Gracias por su pago"
+  },
+  "sign_all": {
+    "title": "Firmar múltiples transacciones",
+    "transaction_confirmed": "Transacción confirmada en ronda"
+  },
+  "arc14": {
+    "service_realm_title": "Dominio de servicio",
+    "network_note": "Tenga en cuenta que ARC14 requiere selección de red. Asegúrese de usar la misma red que el servicio de destino.",
+    "copy_token_to_dashboard": "Copy token to dashboard",
+    "token_copied_to_clipboard": "Token copied to clipboard"
+  },
+  "tools": {
+    "opt_in_governance_title": "Optar por la gobernanza de algorand desde múltiples cuentas a la vez",
+    "opt_in_governance_help": "Para optar como gobernador, necesita enviar mensaje desde su cuenta a la cuenta específica de algorand foundation con mensaje de cuántos algos opta en período específico.",
+    "merge_accounts_title": "Fusionar múltiples cuentas en una",
+    "pay_multiple_title": "Pagar a múltiples cuentas desde una sola cuenta - Distribuir algos",
+    "pay_from_multiple_title": "Pagar desde múltiples cuentas a la vez",
+    "generate_accounts_title": "Generar múltiples cuentas",
+    "results": "Resultados"
+  },
+  "common": {
+    "go": "Ir",
+    "algo": "Algo",
+    "algorand": "Algorand"
   }
 }

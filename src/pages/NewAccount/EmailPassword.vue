@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import MainLayout from "../../layouts/Main.vue";
-import { computed, onMounted, reactive, ref } from "vue";
+import { computed, onMounted, reactive } from "vue";
 import { useI18n } from "vue-i18n";
 import Password from "primevue/password";
 import InputText from "primevue/inputtext";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import InputSwitch from "primevue/inputswitch";
-import { passwordStrength } from "check-password-strength";
+import { RootState } from "@/store";
 
 const state = reactive({
   lastError: "",
@@ -23,7 +23,7 @@ const canCreatePassword = computed(() => {
 });
 const { t } = useI18n(); // use as global scope
 
-const store = useStore();
+const store = useStore<RootState>();
 const router = useRouter();
 
 function checkEmailValidity() {
@@ -41,7 +41,7 @@ async function createAccount() {
       password: state.password,
     });
 
-    router.push({ name: "Accounts" });
+    router.push("/account/" + store.state.wallet.lastActiveAccount);
   } catch (err: any) {
     const error = err.message ?? err;
     console.error("failed to create account", error, err);
@@ -54,36 +54,46 @@ onMounted(async () => {
 </script>
 <template>
   <MainLayout>
-    <h1>{{ $t("arc76account.title") }}</h1>
+    <h1>{{ t("arc76account.title") }}</h1>
 
     <Card>
       <template #content>
         <div v-if="state.lastError">
           <Message severity="error">
-            {{ $t("new_account_pass.last_error") }}: {{ state.lastError }}
+            {{ t("new_account_pass.last_error") }}: {{ state.lastError }}
           </Message>
         </div>
         <p>
-          {{ $t("arc76account.description") }}
+          {{ t("arc76account.description") }}
         </p>
         <p>
-          {{ $t("arc76account.description2") }}
+          {{ t("arc76account.description2") }}
         </p>
         <Message severity="error" v-if="!state.savePassword">
-          {{ $t("arc76account.arc_draft") }}
+          {{ t("arc76account.arc_draft") }}
         </Message>
-        <div class="p-fluid">
-          <div class="p-field mb-2">
-            <label for="email">{{ $t("arc76account.email") }}</label>
+        <div class="field grid">
+          <label class="col-12 mb-2 md:col-2 md:mb-0" for="email">{{
+            t("arc76account.email")
+          }}</label>
+          <div class="col-12 md:col-10">
             <InputText
+              class="w-full"
               id="email"
               v-model="state.email"
               @keyup="checkEmailValidity"
             />
           </div>
-          <div class="p-field mb-2">
-            <label for="w">{{ $t("arc76account.select_password") }}</label>
+        </div>
+
+        <div class="field grid">
+          <label for="w" class="col-12 mb-2 md:col-2 md:mb-0">
+            {{ t("arc76account.select_password") }}
+          </label>
+          <div class="col-12 md:col-10">
             <Password
+              class="w-full"
+              inputClass="w-full"
               :input-props="{ autocomplete: 'new-password' }"
               inputId="w"
               v-model="state.password"
@@ -91,30 +101,45 @@ onMounted(async () => {
               :toggle-mask="true"
             />
           </div>
-          <div class="p-field mb-2">
-            <label>{{ $t("arc76account.save_password_switch") }}</label>
-            <div>
-              <InputSwitch class="my-2" v-model="state.savePassword" />
-            </div>
+        </div>
+        <div class="field grid">
+          <label class="col-12 mb-2 md:col-2 md:mb-0" for="savePassword">
+            {{ t("arc76account.save_password_switch") }}
+          </label>
+          <div class="col-12 md:col-10">
+            <InputSwitch
+              class="my-2"
+              v-model="state.savePassword"
+              inputId="savePassword"
+            />
+            <p v-if="!state.savePassword">
+              {{ t("arc76account.password_not_stored") }}
+            </p>
+            <Message severity="error" v-if="!state.savePassword">
+              {{ t("arc76account.gui_not_implemented") }}
+            </Message>
           </div>
-
-          <p v-if="!state.savePassword">
-            {{ $t("arc76account.password_not_stored") }}
-          </p>
-          <Message severity="error" v-if="!state.savePassword">
-            {{ $t("arc76account.gui_not_implemented") }}
-          </Message>
-          <div class="p-field mb-2">
-            <label for="name">{{ $t("accounts.account_name") }}</label>
-            <InputText id="name" v-model="state.name" />
+        </div>
+        <div class="field grid">
+          <label class="col-12 mb-2 md:col-2 md:mb-0" for="name">
+            {{ t("accounts.account_name") }}
+          </label>
+          <div class="col-12 md:col-10">
+            <InputText id="name" v-model="state.name" class="w-full" />
           </div>
-          <Button
-            class="my-2"
-            @click="createAccount"
-            :disabled="!canCreatePassword"
-          >
-            {{ $t("newacc.create_account") }}
-          </Button>
+        </div>
+        <div class="field grid">
+          <label class="col-12 mb-2 md:col-2 md:mb-0"></label>
+          <div class="col-12 md:col-10">
+            <Button
+              class="my-2"
+              @click="createAccount"
+              :disabled="!canCreatePassword"
+              id="create_account"
+            >
+              {{ t("newacc.create_account") }}
+            </Button>
+          </div>
         </div>
       </template>
     </Card>

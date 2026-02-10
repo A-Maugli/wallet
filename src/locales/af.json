@@ -4,7 +4,10 @@
     "text": "Die webwerf wat jy soek, kan nie gevind word nie."
   },
   "footer": {
-    "text": "A-Wallet - Oopbron PWA Algorand gemeenskap beursie"
+    "text": "A-Wallet - Oopbron PWA Algorand gemeenskap beursie",
+    "session_timeout_header": "Sessie tydlimiet waarskuwing",
+    "session_timeout_message": "Jou sessie sal binnekort verval. Wil jy voortgaan?",
+    "session_timeout_continue": "Gaan voort met sessie"
   },
   "login": {
     "new_wallet": "Nuwe beursie",
@@ -27,6 +30,7 @@
     "go_back": "Gaan terug",
     "go_home": "Gaan huis toe",
     "copy_address": "Kopieer adres",
+    "copied": "Copied",
     "copied_to_clipboard": "Gekopieer na knipbord",
     "stop_camera": "Stop kamera",
     "cancel": "Kanselleer",
@@ -62,8 +66,9 @@
     "get_quote": "Kry kwotasie",
     "apps_optin": "SWAP vereis dat jou rekening inskakel by die programme",
     "apps_optin_button": "Skakel in by die programme",
-    "execute_button_deflex": "Uitvoer met Deflex",
+    "execute_button_deflex": "Uitvoer met Haystack",
     "execute_button_folks": "Uitvoer met Folks router",
+    "execute_button_biatec": "Voer uit met Biatec router",
     "slippage": "Slippage persentasie"
   },
   "govtoolsmenu": {
@@ -192,7 +197,32 @@
     "arc14_help": "ARC 14 is 'n verifikasie-standaard wat onderteken transaksies gebruik. Jy kan die verifikasie-token op hierdie bladsy genereer.",
     "account_actions": "Rekeningaksies",
     "asset_optinArc200": "OptIn na ARC200-bate",
-    "asset_optinArc200_help": "Jy kan op jou rekening die ARC200-bates sien. ARC200-bates is slimkontrakte met 'n funksie wat enigiemand se rekening kan opt-in om die bate te kan ontvang. ARC200-bates kan gevaarlik wees en jy moet 'n betroubare oudit van die slimkontrak vereis sodat jy dit volledig kan vertrou."
+    "asset_optinArc200_help": "Jy kan op jou rekening die ARC200-bates sien. ARC200-bates is slimkontrakte met 'n funksie wat enigiemand se rekening kan opt-in om die bate te kan ontvang. ARC200-bates kan gevaarlik wees en jy moet 'n betroubare oudit van die slimkontrak vereis sodat jy dit volledig kan vertrou.",
+    "scheduled_payment": "Scheduled payment",
+    "scheduled_payment_help": "You can setup and manage a scheduled periodic payments to another accounts",
+    "hide_account": "Hide account",
+    "unhide_account": "Unhide account",
+    "vote_first_round": "Vote First Round",
+    "vote_last_round": "Vote Last Round",
+    "vote_key_dilution": "Vote Key Dilution",
+    "selection_key": "Selection Key",
+    "vote_key": "Vote Key",
+    "stateproof_key": "StateProof Key",
+    "realm": "Realm",
+    "arc14msig_process": "Please sign ARC14 authentication transaction and return back to this form.",
+    "hasArc14": "ARC14 auth has been loaded.",
+    "generating_keys": "Generating participation keys.. Please be patient, the participation node is performing CPU sensitive task.",
+    "button_sign_keyreg": "Sign key registration tx",
+    "button_close_custom_keyreg": "Close KeyReg tx form",
+    "button_activate_wizzard": "Activate wizard",
+    "button_fetch_realm": "Step 1/4: Fetch ARC14 realm",
+    "button_sign_arc14": "Step 2/4: Sign ARC14 realm",
+    "button_sign_arc14_msig": "Step 2/4: Multisign ARC14 realm",
+    "button_load_participatin_data": "Step 3/4: Load participation data",
+    "button_sign_keyreg_tx": "Step 4/4: Sign participation tx",
+    "button_custom_keyreg": "Custom KeyReg tx",
+    "making_account_online": "Setting your account to online state. Please wait a while",
+    "making_account_offline": "Setting your account to offline state. Please wait a while"
   },
   "acc_overview_assets": {
     "name": "Naam",
@@ -282,12 +312,12 @@
     "email_pass_account": "E-pos & Wagwoord rekening",
     "shamir_account": "Shamir-back-upherstel",
     "overview": "Nuwe rekening aksies",
-    "create_basic_help": "Algorand basiese rekening is ED25529 rekening met privaatsleutel. Hierdie metode gebruik jou rekenaar se ewekansige getalgenerator om 'n geheim vir jou rekening te skep.",
+    "create_basic_help": "Algorand basiese rekening is ED25519 rekening met privaatsleutel. Hierdie metode gebruik jou rekenaar se ewekansige getalgenerator om 'n geheim vir jou rekening te skep.",
     "ledger_account_help": "Een van die mees veilige oplossings is om die geheime sleutelgenerering deur 'n gespesialiseerde toestel te hanteer. Hierdie rekening maak gebruik van die Ledger-toestel om jou rekening te skep en die ondertekeningsoperasies te hanteer.",
     "wc_account_help": "Jy kan met jou vriend se beursie verbind deur die wallet connect-rekening tipe te gebruik. Jy kan hulle versoek om die boodskap byvoorbeeld as deel van multisig te onderteken.",
     "twofa_account_help": "Twee faktor rekening is 'n multisig rekening, waar een rekening die rekening van jou keuse is, byvoorbeeld ledger rekening of e-pos wagwoord rekening, tweede rekening is herstelrekening - ideaal rekening wat nie in dieselfde veilige berging is nie, en derde rekening is die twee faktor rekening van die bediener wat transaksies onderteken wanneer jy die korrekte twee faktor pin kode voorsien.",
     "email_pass_account_help": "ARC76 E-pos & Wagwoord rekening stel jou in staat om algorand rekening vanaf enige teks te genereer. Die teks word gehash en genereer 32 byte as saad vir jou algorand rekening. Dit kan 'n alternatief wees vir ander tipes ewekansige getalgenerators in jou rekenaar of hw-toestel",
-    "create_vanity_help": "You can brute force nice account address for your ED25529 account. This method simply tries a lot of combinations of creating account and lets you pick first or last letters of the account address.",
+    "create_vanity_help": "You can brute force nice account address for your ED25519 account. This method simply tries a lot of combinations of creating account and lets you pick first or last letters of the account address.",
     "create_multisign_account_help": "Multisig accounts are the most secure accounts. If used in combination of multiple ledger devices and different random number generators, this provides enterprise level of security which is hardcoded directly to the algorand blockchain.",
     "watch_account_help": "You can track any account on the network.",
     "import_account_help": "You can recover the account from the algorand recovery mnemonic.",
@@ -295,7 +325,11 @@
     "create_first": "Create your first account",
     "no_accounts_at_network": "There are no accounts for selected network",
     "basic_options": "Basic options",
-    "advanced_options": "Advanced options"
+    "advanced_options": "Advanced options",
+    "skip_challange": "Skip challange",
+    "new_account_challange": "New account challange",
+    "click_to_show_positions": "Click to show positions",
+    "to": "to"
   },
   "arc76account": {
     "title": "Email and password account (ARC-0076)",
@@ -537,7 +571,6 @@
     "a8_3": "Select all accounts that can sign the transactions and select how many signatures that adhere to the minimum for the network to accept the multisig payment.",
     "a8_4": "After you create the multisignature account, you can access it from the accounts list page."
   },
-
   "connect": {
     "title": "Connect to DApps using WalletConnect",
     "uri": "WalletConnect URI",
@@ -584,7 +617,9 @@
     "session_proposals": "Session proposals",
     "toggle_camera": "Toggle camera",
     "init_wc": "Initialize connection to Wallet Connect",
-    "sign_all": "Sign all"
+    "sign_all": "Sign all",
+    "proposer": "Proposer",
+    "all_accounts": "Use all wallet accounts"
   },
   "new_account_wc": {
     "title": "Add WalletConnect account",
@@ -617,7 +652,11 @@
     "warning": "You can select public participation node in order to verify the blocks in the network. You will generate new participation keys at the public algod server and sign the transaction to allow these participation keys collect blocks data. This will cost you as one transaction on the network (0.001 algo). Online account state does not mean that your private key is exposed to the internet. It means that your account is registered at the online algod node which is protecting blockchain.",
     "makeOnline": "Make account online",
     "makeOffline": "Make account offline",
-    "host": "Algod host"
+    "host": "Algod host",
+    "fromclipboard": "Process data from clipboard",
+    "stakingRegistration": "Register for staking - 2A network fee",
+    "stakingHelp": "By paying 2 algorand now as network fee, and having more than 30k algos on your account, you are eligible to receive the staking rewards anytime the staking node mints new block.",
+    "onlineRounds": "Number of rounds to protect the network"
   },
   "new_account_shamir": {
     "header": "Shamir backup account recovery",
@@ -659,5 +698,122 @@
     "is_opted_in": "Account can receive asset",
     "create_box": "Create box for this asset for this account",
     "save_action": "Save asset to your account"
+  },
+  "scheduled_payments": {
+    "title": "Scheduled payments management",
+    "description": "With decentralized scheduler you will deploy the smart contract - escrow account which will be used for purpose to allow any executor perform withdrawal from your escrow account to the destination account when the time comes. Executors are incentivized to execute your scheduled task with vision of receiving small fee paid in ASA.Gold token - 0.001 gram of gold.",
+    "new_scheduled_payment": "New scheduled payment",
+    "period": "Period",
+    "pay_to": "Pay to",
+    "send_asset": "Asset to send",
+    "create_escrow_account": "Create escrow account",
+    "list_of_payments": "List of active payments",
+    "no_payment_found": "No scheduled payments has been found",
+    "app_id": "Escrow app id",
+    "app_address": "Escrow app address",
+    "start": "Start",
+    "fee_balance": "Fee balance",
+    "execution_fee": "Execution fee",
+    "description_detail": "In this detail overview of the scheduled payment you can see the current asset balance of the escrow account and you have actions to deposit more assets to the escrow account or to executors.",
+    "details_title": "Scheduled payment details",
+    "seconds": "seconds",
+    "deposit_fee_title": "Deposit asa.gold token to fee pool smart contract",
+    "fee_asset_id": "Execution fee token",
+    "amount_to_deposit": "Amount to deposit to fees",
+    "get_more": "Get more tokenized gold",
+    "list_of_assets": "List of assets at escrow account",
+    "assets_loading": "Asset information is loading",
+    "asset_id": "Asset ID",
+    "asset_name": "Asset name",
+    "asset_amount": "Asset amount",
+    "deposit": "Deposit",
+    "optin_title": "Escrow account optin action",
+    "optin_to_asset": "Opt in to asset",
+    "optin_click": "Opt in",
+    "withdraw_asset_title": "Withdraw from escrow account",
+    "withdraw_asset": "Asset to withdraw",
+    "withdraw_amount": "Amount to withdraw",
+    "withdraw_click": "Execute withdrawal",
+    "load_script_title": "Load app execution profile",
+    "load_click": "Load",
+    "xgov_promo": "This work has been performed with support from the Algorand Foundation xGov Grants Program"
+  },
+  "donation": {
+    "title": "Help ons asseblief",
+    "project_intro": "Hierdie projek is in Junie 2021 begin as die eerste oop bron algorand beursie.",
+    "funding_received": "Danksy kundige goewerneurs het ons befondsing ontvang om te skep",
+    "twofa_accounts": "twee-faktor verifikasie rekening",
+    "and": "en",
+    "payment_scheduler": "betaling skeduleerder",
+    "community_active": "Ons is aktief in die algorand gemeenskap. Ons het geskep",
+    "algorand_directory": "Algorand Gids",
+    "wallet_support": ", naas die beursie ondersteuning, het ons geskep die",
+    "payment_gateway": "betaling hek",
+    "no_middleman": "wat geen finansiële tussenganger benodig nie, ons het oop bron gedesentraliseerde stemstelsel gebou op die algorand netwerk, en ons het die gedesentraliseerde",
+    "donation_web": "skenking web",
+    "future_vision": "Ons het verskeie visies waar ons die algorand gemeenskap kan help groei.",
+    "graphics_designer": "Ons sou graag 'n grafiese ontwerper wil huur om die voorkoms van AWallet te verbeter. Ons verwag koste van ongeveer 1000 USDt.",
+    "donate_now": "Skenk nou",
+    "translation_cost": "Vertaling na ander taal kos ongeveer 50 USD. Stuur ons asseblief in die nota inligting na watter taal jy AWallet vertaal wil hê.",
+    "magento_gateway": "Betaling hek implementering vir Magento - Geen tussenganger, jy aanvaar betalings na jou rekening, koppel met fakture",
+    "accept_donations": "Ons aanvaar skenkings na hierdie rekening:",
+    "thank_you": "Dankie",
+    "ludo_scholtz": "Ludo Scholtz",
+    "company_name": "Scholtz&Company, jsa"
+  },
+  "placeholders": {
+    "source_asset": "Bron bate",
+    "destination_asset": "Bestemming bate",
+    "service_realm": "Diens domein. Byvoorbeeld 2FA#ARC14",
+    "keyword_search": "Sleutelwoord soek",
+    "search_by_asset_id": "Soek deur bate ID",
+    "search_by_type": "Soek deur tipe",
+    "search_by_date": "Soek deur datum",
+    "search_by_amount": "Soek deur bedrag",
+    "search_by_sender": "Soek deur stuurder",
+    "search_by_receiver": "Soek deur ontvanger",
+    "search_by_fee": "Soek deur fooi",
+    "search_by_round": "Soek deur ronde",
+    "search_by_name": "Soek deur naam",
+    "search_by_address": "Soek deur adres"
+  },
+  "buttons": {
+    "try_it_out": "Probeer dit",
+    "exchange_tokens": "⇅ Ruil bron en bestemming tokens"
+  },
+  "labels": {
+    "use_folks": "Gebruik Folks router",
+    "use_deflex": "Gebruik Haystack",
+    "use_biatec": "Gebruik Biatec router",
+    "quote": "Kwotasie:",
+    "price": "Prys:"
+  },
+  "success": {
+    "payment_successful": "Betaling was suksesvol",
+    "thank_you_payment": "Dankie vir jou betaling"
+  },
+  "sign_all": {
+    "title": "Teken meervoudige transaksies",
+    "transaction_confirmed": "Transaksie bevestig in ronde"
+  },
+  "arc14": {
+    "service_realm_title": "Diens domein",
+    "network_note": "Let wel dat ARC14 netwerk seleksie vereis. Maak seker jy gebruik dieselfde netwerk as die bestemming diens.",
+    "copy_token_to_dashboard": "Copy token to dashboard",
+    "token_copied_to_clipboard": "Token copied to clipboard"
+  },
+  "tools": {
+    "opt_in_governance_title": "Sluit aan vir algorand regering vanaf veelvuldige rekeninge gelyktydig",
+    "opt_in_governance_help": "Om aan te sluit as 'n goewerneur, moet jy boodskap stuur vanaf jou rekening na die algorand stigting spesifieke rekening met boodskap hoeveel algos jy aansluit in spesifieke periode.",
+    "merge_accounts_title": "Saamvoeg veelvuldige rekeninge na een",
+    "pay_multiple_title": "Betaal na veelvuldige rekeninge vanaf enkele rekening - Versprei algos",
+    "pay_from_multiple_title": "Betaal vanaf veelvuldige rekeninge gelyktydig",
+    "generate_accounts_title": "Genereer veelvuldige rekeninge",
+    "results": "Resultate"
+  },
+  "common": {
+    "go": "Gaan",
+    "algo": "Algo",
+    "algorand": "Algorand"
   }
 }

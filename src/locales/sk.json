@@ -4,7 +4,10 @@
     "text": "Stránka ktorú hľadáte nie je bohužiaľ k dispozícii. Skúste prejsť na hlavnú stránku."
   },
   "footer": {
-    "text": "A-Wallet - Komunitná algorand peňaženka s otvoreným kódom"
+    "text": "A-Wallet - Komunitná algorand peňaženka s otvoreným kódom",
+    "session_timeout_header": "Upozornenie na vypršanie relácie",
+    "session_timeout_message": "Vaša relácia čoskoro vyprší. Chcete pokračovať?",
+    "session_timeout_continue": "Pokračovať v relácii"
   },
   "login": {
     "new_wallet": "Nová peňaženka",
@@ -27,12 +30,14 @@
     "go_back": "Naspäť",
     "go_home": "Domov",
     "copy_address": "Skopírovať adresu",
+    "copied": "Copied",
     "copied_to_clipboard": "Skopírované",
     "stop_camera": "Vypnúť kameru",
     "cancel": "Zrušiť",
     "yes": "Áno",
     "no": "Nie",
     "loading": "Šťahujem údaje..",
+    "last_error": "Posledná chyba",
     "keyword_search": "Fultextové vyhľádávanie"
   },
   "navbar": {
@@ -61,8 +66,9 @@
     "get_quote": "Získať kotáciu",
     "apps_optin": "SWAP vyžaduje aby ste za zaregistrovali k aplikáciám",
     "apps_optin_button": "Zaregistrujte sa k aplikáciám (optin)",
-    "execute_button_deflex": "Vykonať swap cez Deflex",
+    "execute_button_deflex": "Vykonať swap cez Haystack router",
     "execute_button_folks": "Vykonať swap cez Folks router",
+    "execute_button_biatec": "Vykonať pomocou Biatec routera",
     "slippage": "Slippage percentage"
   },
   "govtoolsmenu": {
@@ -191,7 +197,32 @@
     "arc14_help": "ARC 14 je autorizačný štandard ktorý využívat podpísané transakcie. Na tejto stránke si môžete vygenerovať autorizačné tokeny k vášmu účtu a externej službe.",
     "account_actions": "Akcie účtu",
     "asset_optinArc200": "Pridať ARC200 aktívum",
-    "asset_optinArc200_help": "Na svojom účte môžete sledovať a robiť prevody ARC200 aktív. ARC200 aktívum je smart kontrakt s výhodou, že otvoriť účet užívateľovi môže ktokoľvek. ARC200 aktívum môže byť nebezpečné a mali by ste vyžadovať bezpečnostný audit smart kontraktu pred tým ako ho začnete používať."
+    "asset_optinArc200_help": "Na svojom účte môžete sledovať a robiť prevody ARC200 aktív. ARC200 aktívum je smart kontrakt s výhodou, že otvoriť účet užívateľovi môže ktokoľvek. ARC200 aktívum môže byť nebezpečné a mali by ste vyžadovať bezpečnostný audit smart kontraktu pred tým ako ho začnete používať.",
+    "scheduled_payment": "Pravidelné platby",
+    "scheduled_payment_help": "Môžete nastaviť a spravovať pravidelné platby ktorými vykonáte platby na Váš alebo cudzí účet",
+    "hide_account": "Skryť účet",
+    "unhide_account": "Zobrazovať účet",
+    "vote_first_round": "Participovať od bloku",
+    "vote_last_round": "Participovať do bloku",
+    "vote_key_dilution": "Vote Key Dilution",
+    "selection_key": "Selection Key",
+    "vote_key": "Vote Key",
+    "stateproof_key": "StateProof Key",
+    "realm": "Realm",
+    "arc14msig_process": "Podpíšte ARC14 autorizačnú transakciu a vráťte sa naspäť na tento formulár.",
+    "hasArc14": "ARC14 token bol podpísaný.",
+    "generating_keys": "Generujem participačné kľúče.. Táto operácia je náročná na výkon a môže chvíľku trvať.",
+    "button_sign_keyreg": "Podpísať participačnú transakciu",
+    "button_close_custom_keyreg": "Zavrieť formulár",
+    "button_activate_wizzard": "Aktivovať sprievodcu",
+    "button_fetch_realm": "Krok 1/4: Načítať ARC14 realm",
+    "button_sign_arc14": "Step 2/4: Podpísať ARC14 realm",
+    "button_sign_arc14_msig": "Step 2/4: Podpísať ARC14 realm msig",
+    "button_load_participatin_data": "Step 3/4: Vygenerovať participačné kľúče",
+    "button_sign_keyreg_tx": "Step 4/4: Podpísať participačnú transakciu",
+    "button_custom_keyreg": "Vlastná KeyReg tx",
+    "making_account_online": "Nastavujem Váš účet aby participoval na overovaní siete. Táto operácia môže chvíľku trvať.",
+    "making_account_offline": "Nastavujem Váš účet aby neparticipoval na overovaní siete. Táto operácia môže chvíľku trvať."
   },
   "acc_overview_assets": {
     "name": "Name",
@@ -281,7 +312,7 @@
     "email_pass_account": "Účet z emailu a hesla",
     "shamir_account": "Obnova pomocou Shamir kódov",
     "overview": "Akcie pre založenie nového účtu",
-    "create_basic_help": "Základný algorand účet je asymetrický účet s privátnym kľúčom na elyptickej krivke ED25529. Táto metóda používa generátor náhodných čísiel vo Vašom počítači pre vytvorenie privátneho kľúču.",
+    "create_basic_help": "Základný algorand účet je asymetrický účet s privátnym kľúčom na elyptickej krivke ED25519. Táto metóda používa generátor náhodných čísiel vo Vašom počítači pre vytvorenie privátneho kľúču.",
     "ledger_account_help": "Jedna z najbezpečnejších metód pre vytvorenie účtu na algorande je prenechanie vytvorenia privátneho kľúču na špecializovanom zariadení. Tento účet využíva zariadenie ledger pre vytvorenie účtu aj pre podpisovanie transakcií.",
     "wc_account_help": "Pomocou tohto účtu si môžete pripojiť účet Vášho kamaráta pomocou wallet connect. Následne im môžete posielať žiadosti o podpis transakcií napríklad pre účely multipodpisových transakcií.",
     "twofa_account_help": "Účet dvojúrovňovej autorizácie je multipodpisový účet, kde prvý účet je ľubovoľný účet npr ledger alebo základný algorand účet. Druhý účet je účet pre obnovenie ideálne taký ktorý nikdy nebol online a je veľmi dobre zabezpečený. Tretí účet je serverový účet kde server podpíše transakciu iba v prípade ak zadáte správny pin kód z vašej 2FA aplikácie.",
@@ -294,7 +325,11 @@
     "create_first": "Vytvorte si svoj prvý účet",
     "no_accounts_at_network": "Pre vybranú sieť nemáte priradený žiadny účet. Zobrazujú sa všetky účty.",
     "basic_options": "Základné účty",
-    "advanced_options": "Pokročilé možnosti"
+    "advanced_options": "Pokročilé možnosti",
+    "skip_challange": "Preskočiť overenie",
+    "new_account_challange": "New account challange",
+    "click_to_show_positions": "Click to show positions",
+    "to": "to"
   },
   "arc76account": {
     "title": "Účet z emailu a hesla (ARC-0076)",
@@ -544,6 +579,7 @@
     "sendBack": "Odoslať spať do aplikácie",
     "reject": "Zamietnuť",
     "address": "Adresa",
+    "or": "alebo",
     "authaddr": "Autorizačná adresa",
     "index": "Index",
     "type": "Typ",
@@ -563,7 +599,6 @@
     "total_fee": "Celkový poplatok",
     "sign": "Podpísať",
     "clipboard": "Pripojiť zo schárnky",
-    "or": "alebo",
     "sign_txs": "Podpíšte každú transakciu",
     "signed": "Podpísané",
     "to": "Príjemca",
@@ -582,7 +617,9 @@
     "session_proposals": "Návrhy pre reláciu",
     "toggle_camera": "Zapnúť/Vypnúť kameru",
     "init_wc": "Vytvoriť spojenie na Wallet Connect",
-    "sign_all": "Podpísať všetky"
+    "sign_all": "Podpísať všetky",
+    "proposer": "Navrhovateľ",
+    "all_accounts": "Použiť všetky účty"
   },
   "new_account_wc": {
     "title": "Pridať WalletConnect účet",
@@ -611,11 +648,15 @@
     "save_button": "Uložiť účet"
   },
   "onlineofflinedialog": {
-    "header": "Protect the network with your account's balance",
-    "warning": "You can select public participation node in order to verify the blocks in the network. You will generate new participation keys at the public algod server and sign the transaction to allow these participation keys collect blocks data. This will cost you as one transaction on the network (0.001 algo). Online account state does not mean that your private key is exposed to the internet. It means that your account is registered at the online algod node which is protecting blockchain.",
-    "makeOnline": "Make account online",
-    "makeOffline": "Make account offline",
-    "host": "Algod host"
+    "header": "Ochraňujte blockchain Vašim účtom",
+    "warning": "Môžete si vybrať server ktorý bude Vašim účtom ochraňovať sieť. Server vygeneruje tajné kľúče ktorými bude ochraňovať sieť a vašim účtom podpíšete transakciu kde oprávnite tými tajnými kľúčami ochraňovať sieť. Ak máte na účte aspoň 30000 algo, a zaplatíte poplatok 2 algo za registráciu do stakingu, pri každom novom bloku ktorý vytvorí Váš delegovaný server zarobíte staking odmenu ktorá je zložená z vyzbieraných poplatkov z transakcií a z ďalších prostriedkov pre incentivizáciu stakingu.",
+    "makeOnline": "Nastaviť ochranu siete",
+    "makeOffline": "Vypnúť ochranu siete",
+    "host": "Algod server",
+    "fromclipboard": "Sprocesovať dáta zo schránky",
+    "stakingRegistration": "Zaregistrovať pre staking - 2A tx poplatok",
+    "stakingHelp": "Zaplatením 2A a uchovaním zostatku na účte cez 30000 algo získate staking odmeny. Pri každom novom bloku ktorý vytvorý delegovaný server na Váš účet príde staking odmena.",
+    "onlineRounds": "Počet blokov s aktívnou ochranou siete"
   },
   "new_account_shamir": {
     "header": "Obnova účtu pomocou shamir backup",
@@ -657,5 +698,122 @@
     "is_opted_in": "Účet môže prijať aktívum",
     "create_box": "Vytvoriť box pre toto aktívum pre tento účet",
     "save_action": "Uložiť aktívum na účet"
+  },
+  "scheduled_payments": {
+    "title": "Správa plánovaných platieb",
+    "description": "S decentralizovaným plánovačom nasadíte smart kontrakt - escrow účet, ktorý bude použitý na to, aby umožnil akémukoľvek vykonávateľovi vykonať výber z vášho escrow účtu na cieľový účet, keď nastane čas. Vykonávatelia sú motivovaní vykonať vašu naplánovanú úlohu s vidinou získania malého poplatku vyplateného v tokene ASA.Gold - 0.001 gramu zlata.",
+    "new_scheduled_payment": "Nová plánovaná platba",
+    "period": "Perióda",
+    "pay_to": "Zaplatiť komu",
+    "send_asset": "Odoslať aktívum",
+    "create_escrow_account": "Vytvoriť escrow účet",
+    "list_of_payments": "Zoznam aktívnych platieb",
+    "no_payment_found": "Neboli nájdené žiadne plánované platby",
+    "app_id": "ID escrow aplikácie",
+    "app_address": "Adresa escrow aplikácie",
+    "start": "Štart",
+    "fee_balance": "Zostatok poplatkov",
+    "execution_fee": "Poplatok za vykonanie",
+    "description_detail": "V tomto detailnom prehľade plánovanej platby vidíte aktuálny zostatok aktív na escrow účte a máte akcie pre vloženie ďalších aktív na escrow účet alebo pre vykonávateľov.",
+    "details_title": "Detaily plánovanej platby",
+    "seconds": "sekúnd",
+    "deposit_fee_title": "Vložiť token asa.gold do smart kontraktu fondu poplatkov",
+    "fee_asset_id": "Token poplatku za vykonanie",
+    "amount_to_deposit": "Suma na vloženie na poplatky",
+    "get_more": "Získať viac tokenizovaného zlata",
+    "list_of_assets": "Zoznam aktív na escrow účte",
+    "assets_loading": "Informácie o aktívach sa načítavajú",
+    "asset_id": "ID aktíva",
+    "asset_name": "Názov aktíva",
+    "asset_amount": "Množstvo aktíva",
+    "deposit": "Vložiť",
+    "optin_title": "Akcia opt-in escrow účtu",
+    "optin_to_asset": "Opt-in do aktíva",
+    "optin_click": "Opt in",
+    "withdraw_asset_title": "Výber z escrow účtu",
+    "withdraw_asset": "Aktívum na výber",
+    "withdraw_amount": "Suma na výber",
+    "withdraw_click": "Vykonať výber",
+    "load_script_title": "Načítať profil vykonávania aplikácie",
+    "load_click": "Načítať",
+    "xgov_promo": "Táto práca bola vykonaná s podporou programu Algorand Foundation xGov Grants"
+  },
+  "donation": {
+    "title": "Prosím pomôžte nám",
+    "project_intro": "Tento projekt bol zahájený v júni 2021 ako prvá open source algorand peňaženka.",
+    "funding_received": "Vďaka expertným guvernérom sme dostali prostriedky na vytvorenie",
+    "twofa_accounts": "účtov s dvojfaktorovou autentifikáciou",
+    "and": "a",
+    "payment_scheduler": "plánovača platieb",
+    "community_active": "Sme aktívni v algorand komunite. Vytvorili sme",
+    "algorand_directory": "Algorand Directory",
+    "wallet_support": ", okrem podpory peňaženky sme vytvorili",
+    "payment_gateway": "platobnú bránu",
+    "no_middleman": "ktorá nevyžaduje žiadneho finančného sprostredkovateľa, vytvorili sme open source decentralizovaný volebný systém postavený na sieti algorand a vybudovali sme decentralizovaný",
+    "donation_web": "darcovský web",
+    "future_vision": "Máme niekoľko vízií, kde môžeme pomôcť rastu algorand komunity.",
+    "graphics_designer": "Radi by sme najali grafického dizajnéra na vylepšenie vzhľadu AWallet. Očakávame náklady približne 1000 USDt.",
+    "donate_now": "Darovať teraz",
+    "translation_cost": "Preklad do iného jazyka stojí cca 50 USD. Prosím, pošlite nám v poznámke info, do ktorého jazyka by ste chceli AWallet preložiť.",
+    "magento_gateway": "Implementácia platobnej brány do Magento - Žiadny sprostredkovateľ, prijímate platby na svoj účet, párovanie s faktúrami",
+    "accept_donations": "Prijímame dary na tento účet:",
+    "thank_you": "Ďakujeme",
+    "ludo_scholtz": "Ludo Scholtz",
+    "company_name": "Scholtz&Company, jsa"
+  },
+  "placeholders": {
+    "source_asset": "Zdrojové aktívum",
+    "destination_asset": "Cieľové aktívum",
+    "service_realm": "Servisná doména. Napríklad 2FA#ARC14",
+    "keyword_search": "Fulltextové vyhľadávanie",
+    "search_by_asset_id": "Vyhľadať podľa ID aktíva",
+    "search_by_type": "Vyhľadať podľa typu",
+    "search_by_date": "Vyhľadať podľa dátumu",
+    "search_by_amount": "Vyhľadať podľa sumy",
+    "search_by_sender": "Vyhľadať podľa odosielateľa",
+    "search_by_receiver": "Vyhľadať podľa príjemcu",
+    "search_by_fee": "Vyhľadať podľa poplatku",
+    "search_by_round": "Vyhľadať podľa bloku",
+    "search_by_name": "Vyhľadať podľa názvu",
+    "search_by_address": "Vyhľadať podľa adresy"
+  },
+  "buttons": {
+    "try_it_out": "Vyskúšať",
+    "exchange_tokens": "⇅ Vymeniť zdrojové a cieľové tokeny"
+  },
+  "labels": {
+    "use_folks": "Používať Folks router",
+    "use_deflex": "Používať Haystack router",
+    "use_biatec": "Používať Biatec router",
+    "quote": "Kotácia:",
+    "price": "Cena:"
+  },
+  "success": {
+    "payment_successful": "Platba bola úspešná",
+    "thank_you_payment": "Ďakujeme za vašu platbu"
+  },
+  "sign_all": {
+    "title": "Podpísať viacero transakcií",
+    "transaction_confirmed": "Transakcia bola potvrdená v bloku"
+  },
+  "arc14": {
+    "service_realm_title": "Servisná doména",
+    "network_note": "Všimnite si, že ARC14 vyžaduje výber siete. Uistite sa, že používate rovnakú sieť ako cieľová služba.",
+    "copy_token_to_dashboard": "Copy token to dashboard",
+    "token_copied_to_clipboard": "Token copied to clipboard"
+  },
+  "tools": {
+    "opt_in_governance_title": "Prihlásenie sa k algorand governance z viacerých účtov naraz",
+    "opt_in_governance_help": "Aby ste sa prihlásili ako gubernátor, musíte poslať správu zo svojho účtu na konkrétny účet algorand foundation so správou o tom, koľko algos prihlasujete v konkrétnom období.",
+    "merge_accounts_title": "Zlúčiť viacero účtov do jedného",
+    "pay_multiple_title": "Platiť na viacero účtov z jedného účtu - Distribuovať algos",
+    "pay_from_multiple_title": "Platiť z viacerých účtov naraz",
+    "generate_accounts_title": "Generovať viacero účtov",
+    "results": "Výsledky"
+  },
+  "common": {
+    "go": "Ísť",
+    "algo": "Algo",
+    "algorand": "Algorand"
   }
 }

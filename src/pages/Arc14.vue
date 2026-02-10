@@ -9,16 +9,15 @@
           swaggers.
         </p>
         <p>
-          Note that ARC14 requires selection of the network. Make sure that you
-          are using same network as destination service.
+          {{ $t("arc14.network_note") }}
         </p>
         <div>
-          <h2>Service realm</h2>
+          <h2>{{ $t("arc14.service_realm_title") }}</h2>
           <InputText
             id="realm"
             v-model="realm"
             class="w-full"
-            placeholder="Service realm. For example 2FA#ARC14"
+            :placeholder="$t('placeholders.service_realm')"
           />
           <div>
             <Button
@@ -27,6 +26,7 @@
               @click="clickSign"
             >
               <ProgressSpinner
+                v-if="processingSigning"
                 style="width: 1em; height: 1em"
                 strokeWidth="5"
               />
@@ -36,59 +36,65 @@
           <div>
             <Textarea v-model="output" disabled class="w-full" rows="5" />
           </div>
+          <div v-if="output">
+            <Button class="my-2" @click="copyToClipboard">
+              {{ $t("arc14.copy_token_to_dashboard") }}
+            </Button>
+          </div>
         </div>
       </template>
     </Card>
   </MainLayout>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
 import MainLayout from "../layouts/Main.vue";
-import { mapActions } from "vuex";
+import { useStore } from "../store";
+import { useToast } from "primevue/usetoast";
+import { useI18n } from "vue-i18n";
 
-export default {
-  components: {
-    MainLayout,
-  },
-  data() {
-    return {
-      processingSigning: false,
-      output: "",
-      realm: "",
-    };
-  },
-  async mounted() {
-    this.prolong();
-  },
-  methods: {
-    ...mapActions({
-      accountInformation: "indexer/accountInformation",
-      updateAccount: "wallet/updateAccount",
-      lastActiveAccount: "wallet/lastActiveAccount",
-      deleteAccount: "wallet/deleteAccount",
-      setTransaction: "wallet/setTransaction",
-      getAsset: "indexer/getAsset",
-      prolong: "wallet/prolong",
-      setAccountOnline: "kmd/setAccountOnline",
-      openSuccess: "toast/openSuccess",
-      axiosGet: "axios/get",
-      getSK: "wallet/getSK",
-      getTransactionParams: "algod/getTransactionParams",
-      sendRawTransaction: "algod/sendRawTransaction",
-      signAuthTx: "arc14/signAuthTx",
-    }),
-    async clickSign() {
-      try {
-        this.processingSigning = true;
-        this.output = await this.signAuthTx({
-          account: this.$route.params.account,
-          realm: this.realm,
-        });
-      } catch (e) {
-        console.error(e);
-      }
-      this.processingSigning = false;
-    },
-  },
+const store = useStore();
+const route = useRoute();
+const toast = useToast();
+const { t } = useI18n();
+
+const processingSigning = ref(false);
+const output = ref("");
+const realm = ref("");
+
+const prolong = () => store.dispatch("wallet/prolong");
+
+const clickSign = async () => {
+  try {
+    processingSigning.value = true;
+    output.value = await store.dispatch("arc14/signAuthTx", {
+      account: route.params.account,
+      realm: realm.value,
+    });
+  } catch (error) {
+    console.error(error);
+  } finally {
+    processingSigning.value = false;
+  }
 };
+
+const copyToClipboard = async () => {
+  try {
+    await navigator.clipboard.writeText(output.value);
+    toast.add({
+      severity: "info",
+      summary: t("global.copied"),
+      detail: t("arc14.token_copied_to_clipboard"),
+      life: 2000,
+    });
+  } catch (error) {
+    console.error("Failed to copy: ", error);
+  }
+};
+
+onMounted(() => {
+  void prolong();
+});
 </script>

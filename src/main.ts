@@ -12,7 +12,7 @@ const DefaultComponent = markRaw({
 });
 /**/
 
-import "vue3-json-viewer/dist/index.css";
+import JsonViewer from "vue3-json-viewer";
 
 //import "bootstrap";
 //import "bootstrap/dist/css/bootstrap.min.css";
@@ -108,13 +108,16 @@ myApp.component("ProgressSpinner", ProgressSpinner);
 myApp.directive("ripple", Ripple);
 myApp.directive("tooltip", Tooltip);
 
+myApp.use(JsonViewer);
+
 myApp.config.globalProperties.$filters = {
   formatCurrencyBigInt(
     value = 0,
-    currency = store.state.config.tokenSymbol,
+    currency: string = store.state.config.tokenSymbol as string,
     minimumFractionDigits = 6,
     multiply = true,
-    language = store.state.config.language
+    language: string | string[] | undefined = (store.state.config
+      .language as string) ?? undefined
   ) {
     let valueNumber = 0;
     if (multiply) {
@@ -127,10 +130,11 @@ myApp.config.globalProperties.$filters = {
   },
   formatCurrency(
     value = 0,
-    currency = store.state.config.tokenSymbol,
+    currency: string = store.state.config.tokenSymbol as string,
     minimumFractionDigits = 6,
     multiply = true,
-    language = store.state.config.language
+    language: string | string[] | undefined = (store.state.config
+      .language as string) ?? undefined
   ) {
     if (typeof value === "bigint")
       return this.formatCurrencyBigInt(

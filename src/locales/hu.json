@@ -4,7 +4,10 @@
     "text": "A keresett webhely nem található."
   },
   "footer": {
-    "text": "Algo pénztárca"
+    "text": "Algo pénztárca",
+    "session_timeout_header": "Munkamenet időtúllépési figyelmeztetés",
+    "session_timeout_message": "A munkamenet hamarosan lejár. Szeretné folytatni?",
+    "session_timeout_continue": "Munkamenet folytatása"
   },
   "login": {
     "new_wallet": "Új pénztárca",
@@ -27,12 +30,14 @@
     "go_back": "Vissza",
     "go_home": "Ugrás a kezdőlapra",
     "copy_address": "Cím másolása",
+    "copied": "Copied",
     "copied_to_clipboard": "Átmásolva a vágólapra",
     "stop_camera": "Fényképezőgép leállítása",
     "cancel": "Mégsem",
     "yes": "Igen",
     "no": "Nem",
     "loading": "Betöltés alatt...",
+    "last_error": "Utolsó hiba",
     "keyword_search": "Kulcsszó keresés"
   },
   "navbar": {
@@ -61,8 +66,9 @@
     "get_quote": "Kérj ajánlatot",
     "apps_optin": "A cseréhez be kell nevezned az alkalmazásokba",
     "apps_optin_button": "Benevezés az alkalmazásokba",
-    "execute_button_deflex": "Végrehajtás a Deflex használatával",
+    "execute_button_deflex": "Végrehajtás a Haystack használatával",
     "execute_button_folks": "Végrehajtás a Folks router használatával",
+    "execute_button_biatec": "Végrehajtás Biatec routerrel",
     "slippage": "Százalékos különbözet"
   },
   "govtoolsmenu": {
@@ -191,7 +197,32 @@
     "arc14_help": "Az ARC 14 hitelesítés egy olyan szabvány, amely a hitelesítésre aláírt tranzakciókat használ. A hitelesítési érmék ezen a lapon állíthatól elő.",
     "account_actions": "Számla műveletek",
     "asset_optinArc200": "Benevezés egy ARC200 pénzeszközbe",
-    "asset_optinArc200_help": "A számládon megfigyelheted az ARC200 pénzeszközöket. Az ARC200 pénzeszközök olyan okosszerződések, melyekbe bárki benevezhet, ha szeretne ARC200 pénzeszközt fogadni. Az ARC200 pénzeszközök veszélyesek lehetnek, és az okosszerződés alapos vizsgálatára van szükség a teljes bizalom érdekében."
+    "asset_optinArc200_help": "A számládon megfigyelheted az ARC200 pénzeszközöket. Az ARC200 pénzeszközök olyan okosszerződések, melyekbe bárki benevezhet, ha szeretne ARC200 pénzeszközt fogadni. Az ARC200 pénzeszközök veszélyesek lehetnek, és az okosszerződés alapos vizsgálatára van szükség a teljes bizalom érdekében.",
+    "scheduled_payment": "Scheduled payment",
+    "scheduled_payment_help": "You can setup and manage a scheduled periodic payments to another accounts",
+    "hide_account": "Hide account",
+    "unhide_account": "Unhide account",
+    "vote_first_round": "Vote First Round",
+    "vote_last_round": "Vote Last Round",
+    "vote_key_dilution": "Vote Key Dilution",
+    "selection_key": "Selection Key",
+    "vote_key": "Vote Key",
+    "stateproof_key": "StateProof Key",
+    "realm": "Realm",
+    "arc14msig_process": "Please sign ARC14 authentication transaction and return back to this form.",
+    "hasArc14": "ARC14 auth has been loaded.",
+    "generating_keys": "Generating participation keys.. Please be patient, the participation node is performing CPU sensitive task.",
+    "button_sign_keyreg": "Sign key registration tx",
+    "button_close_custom_keyreg": "Close KeyReg tx form",
+    "button_activate_wizzard": "Activate wizard",
+    "button_fetch_realm": "Step 1/4: Fetch ARC14 realm",
+    "button_sign_arc14": "Step 2/4: Sign ARC14 realm",
+    "button_sign_arc14_msig": "Step 2/4: Multisign ARC14 realm",
+    "button_load_participatin_data": "Step 3/4: Load participation data",
+    "button_sign_keyreg_tx": "Step 4/4: Sign participation tx",
+    "button_custom_keyreg": "Custom KeyReg tx",
+    "making_account_online": "Setting your account to online state. Please wait a while",
+    "making_account_offline": "Setting your account to offline state. Please wait a while"
   },
   "acc_overview_assets": {
     "name": "Név",
@@ -281,7 +312,7 @@
     "email_pass_account": "Email & jelszó számla",
     "shamir_account": "Visszaállítás Shamir bizonsági mentésből",
     "overview": "Új számlára vonatkozó műveletek",
-    "create_basic_help": "Az Algorand alapszámla egy ED25529 számla, amelyhez egy privát kulcs tartozik. Ez a módszer a számládhoz tartozó titok előállítására a számítógéped véletlenszám generátorát használja.",
+    "create_basic_help": "Az Algorand alapszámla egy ED25519 számla, amelyhez egy privát kulcs tartozik. Ez a módszer a számládhoz tartozó titok előállítására a számítógéped véletlenszám generátorát használja.",
     "ledger_account_help": "A legbiztonságosabb megoldás az, ha a titkos kulcs előállítását egy erre specializált berendezés végzi. Ez a számla a Ledger eszközét használja a számla létrehozására és az aláírási műveletek kezelésére.",
     "wc_account_help": "A WalletConnect számlatípussal hozzá tudsz kapcsolódni a barátod pénztárcájához, ily módon például el tudod neki küldeni azt a kérést, hogy egy multisig részeként írja alá az üzenetet.",
     "twofa_account_help": "A két faktoros számla egy olyan multisig számla, amelyben az első számla egy általad választott tetszőleges számla, például egy Ledger számla vagy egy email, jelszó számla, a második számla pedig visszaállításra használt számla - ideális esetben egy olyan számla, amely nem ugyanabban a biztonságos tárolóban van, egy harmadik számla pedig a szerveren lévő, második faktorhoz tartozó számla. A szerver akkor írja alá ezzel a számlával a tranzakciókat, ha helyesen megadtad a 2-ik faktorhoz tartozó kódot.",
@@ -294,7 +325,11 @@
     "create_first": "Hozd létre az első számlát",
     "no_accounts_at_network": "Nincsek számláid a kiválasztott hálózaton",
     "basic_options": "Alapbeállítások",
-    "advanced_options": "Speciális beállítások"
+    "advanced_options": "Speciális beállítások",
+    "skip_challange": "Skip challange",
+    "new_account_challange": "New account challange",
+    "click_to_show_positions": "Click to show positions",
+    "to": "to"
   },
   "arc76account": {
     "title": "Email és jelszó számla (ARC-0076)",
@@ -582,7 +617,9 @@
     "session_proposals": "Munkamenet javaslatok",
     "toggle_camera": "Kamera be/kikapcsolás",
     "init_wc": "Kapcsolat inicializálása a WalletConnect-hez",
-    "sign_all": "Az összes aláírása"
+    "sign_all": "Az összes aláírása",
+    "proposer": "Proposer",
+    "all_accounts": "Use all wallet accounts"
   },
   "new_account_wc": {
     "title": "WalletConnect számla létrehozása",
@@ -615,7 +652,11 @@
     "warning": "Kiválaszthatsz egy nyilvános hálózati csomópontot, amellyel a hálózat blokkjai ellenőrizhetők. Az új blokkok alkotásához szükséges részvételi kulcsok (participation keys) ezen a nyilvános algod szerverek fognak előállni, az aláírásoddal pedig engedélyezheted, hogy ezek a részvételi kulcsok részt vegyenek a blokkok előállításában. Ennek költsége csupán egy hálózati tranzakciót (0,001 Algó) tesz ki. A számla online lekötése nem azt jelenti, hogy a privát kulcsod elérhető lesz az interneten, hanem azt, hogy a számlád regisztrálva lett az online algod csomópontbban, amely védi a blokkláncot.",
     "makeOnline": "A számla online-ba állítása",
     "makeOffline": "A számla offline-ba állítása",
-    "host": "Algod számítógép"
+    "host": "Algod számítógép",
+    "fromclipboard": "Process data from clipboard",
+    "stakingRegistration": "Register for staking - 2A network fee",
+    "stakingHelp": "By paying 2 algorand now as network fee, and having more than 30k algos on your account, you are eligible to receive the staking rewards anytime the staking node mints new block.",
+    "onlineRounds": "Number of rounds to protect the network"
   },
   "new_account_shamir": {
     "header": "Számla helyreállítás Shamir biztonsági mentésből",
@@ -657,5 +698,122 @@
     "is_opted_in": "A számla képes a pénzeszköz fogadására",
     "create_box": "A számlához, ezen belül a pénzeszközhöz egy tároló (box) létrehozása",
     "save_action": "Pénzeszköz mentése a számlába"
+  },
+  "scheduled_payments": {
+    "title": "Scheduled payments management",
+    "description": "With decentralized scheduler you will deploy the smart contract - escrow account which will be used for purpose to allow any executor perform withdrawal from your escrow account to the destination account when the time comes. Executors are incentivized to execute your scheduled task with vision of receiving small fee paid in ASA.Gold token - 0.001 gram of gold.",
+    "new_scheduled_payment": "New scheduled payment",
+    "period": "Period",
+    "pay_to": "Pay to",
+    "send_asset": "Asset to send",
+    "create_escrow_account": "Create escrow account",
+    "list_of_payments": "List of active payments",
+    "no_payment_found": "No scheduled payments has been found",
+    "app_id": "Escrow app id",
+    "app_address": "Escrow app address",
+    "start": "Start",
+    "fee_balance": "Fee balance",
+    "execution_fee": "Execution fee",
+    "description_detail": "In this detail overview of the scheduled payment you can see the current asset balance of the escrow account and you have actions to deposit more assets to the escrow account or to executors.",
+    "details_title": "Scheduled payment details",
+    "seconds": "seconds",
+    "deposit_fee_title": "Deposit asa.gold token to fee pool smart contract",
+    "fee_asset_id": "Execution fee token",
+    "amount_to_deposit": "Amount to deposit to fees",
+    "get_more": "Get more tokenized gold",
+    "list_of_assets": "List of assets at escrow account",
+    "assets_loading": "Asset information is loading",
+    "asset_id": "Asset ID",
+    "asset_name": "Asset name",
+    "asset_amount": "Asset amount",
+    "deposit": "Deposit",
+    "optin_title": "Escrow account optin action",
+    "optin_to_asset": "Opt in to asset",
+    "optin_click": "Opt in",
+    "withdraw_asset_title": "Withdraw from escrow account",
+    "withdraw_asset": "Asset to withdraw",
+    "withdraw_amount": "Amount to withdraw",
+    "withdraw_click": "Execute withdrawal",
+    "load_script_title": "Load app execution profile",
+    "load_click": "Load",
+    "xgov_promo": "This work has been performed with support from the Algorand Foundation xGov Grants Program"
+  },
+  "donation": {
+    "title": "Please help us",
+    "project_intro": "This project has been started in June 2021 as the first open source algorand wallet.",
+    "funding_received": "Thank to expert governors, we have received funds to create",
+    "twofa_accounts": "two factor authentication accounts",
+    "and": "and",
+    "payment_scheduler": "payment scheduler",
+    "community_active": "We are active in algorand community. We have created",
+    "algorand_directory": "Algorand Directory",
+    "wallet_support": ", besides the wallet support, we have created the",
+    "payment_gateway": "payment gateway",
+    "no_middleman": "which does not require any financial middleman, we have created open source decentralized voting system built on the algorand network, and we have built the decentralized",
+    "donation_web": "donation web",
+    "future_vision": "We have several visions where we can help the algorand community grow.",
+    "graphics_designer": "We would like to hire graphics designer to improve the Look&Feel of the AWallet. We expect costs approximately 1000 USDt.",
+    "donate_now": "Donate now",
+    "translation_cost": "Translation to other language costs approx 50 USD. Please send us in the note info to which language you would like the AWallet to be translated.",
+    "magento_gateway": "Payment gateway implementation to Magento - No middleman, you accept the payments to your account, match with invoices",
+    "accept_donations": "We accept donations to this account:",
+    "thank_you": "Thank you",
+    "ludo_scholtz": "Ludo Scholtz",
+    "company_name": "Scholtz&Company, jsa"
+  },
+  "placeholders": {
+    "source_asset": "Source asset",
+    "destination_asset": "Destination asset",
+    "service_realm": "Service realm. For example 2FA#ARC14",
+    "keyword_search": "Keyword Search",
+    "search_by_asset_id": "Search by asset id",
+    "search_by_type": "Search by type",
+    "search_by_date": "Search by date",
+    "search_by_amount": "Search by amount",
+    "search_by_sender": "Search by sender",
+    "search_by_receiver": "Search by receiver",
+    "search_by_fee": "Search by fee",
+    "search_by_round": "Search by round",
+    "search_by_name": "Search by name",
+    "search_by_address": "Search by address"
+  },
+  "buttons": {
+    "try_it_out": "Try it out",
+    "exchange_tokens": "⇅ Exchange source and destination token"
+  },
+  "labels": {
+    "use_folks": "Use Folks router",
+    "use_deflex": "Use Haystack router",
+    "use_biatec": "Use Biatec router",
+    "quote": "Quote:",
+    "price": "Price:"
+  },
+  "success": {
+    "payment_successful": "Payment has been successful",
+    "thank_you_payment": "Thank you for your payment"
+  },
+  "sign_all": {
+    "title": "Sign multiple transactions",
+    "transaction_confirmed": "Transaction confirmed in round"
+  },
+  "arc14": {
+    "service_realm_title": "Service realm",
+    "network_note": "Note that ARC14 requires selection of the network. Make sure that you are using same network as destination service.",
+    "copy_token_to_dashboard": "Copy token to dashboard",
+    "token_copied_to_clipboard": "Token copied to clipboard"
+  },
+  "tools": {
+    "opt_in_governance_title": "Opt in for algorand governance from multiple accounts at once",
+    "opt_in_governance_help": "To opt in as a governor, you need to send message from your account to the algorand foundation specific account with message how much algos you opt in in specific perior.",
+    "merge_accounts_title": "Merge multiple accounts to one",
+    "pay_multiple_title": "Pay to multiple accounts from single account - Distribute algos",
+    "pay_from_multiple_title": "Pay from multiple accounts at once",
+    "generate_accounts_title": "Generate multiple accounts",
+    "results": "Results"
+  },
+  "common": {
+    "go": "Go",
+    "algo": "Algo",
+    "algorand": "Algorand"
   }
 }

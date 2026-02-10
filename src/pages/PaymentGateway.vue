@@ -205,7 +205,7 @@
                       :step="0.000001"
                       :maxFractionDigits="6"
                     />
-                    <InputGroupAddon>Algo</InputGroupAddon>
+                    <InputGroupAddon>{{ $t("common.algo") }}</InputGroupAddon>
                   </InputGroup>
                 </div>
                 <span v-if="!build">
@@ -328,14 +328,21 @@
             </div>
             <br />
             <a :href="url" target="_blank" rel="noreferrer">
-              <Button>Try it out</Button>
+              <Button>{{ $t("buttons.try_it_out") }}</Button>
             </a>
           </div>
         </div>
         <div v-if="!build" class="grid">
           <div class="md:col-12">
             <h2>{{ $t("gateway.example") }}</h2>
-            <code>
+            <code
+              class="my-2"
+              style="
+                overflow-wrap: anywhere;
+                word-wrap: break-word;
+                hyphens: auto;
+              "
+            >
               &lt;a
               href="https://www.a-wallet.net/gateway/YWxnb3JhbmQ6Ly9QNjVMWEhBNU1FRE1PSjJaQUlUTFpXWVNVNlcyNUJGMkZDWEo1S1FSRFVCMk5UMlQ3RFBBQUZZVDNVPyZhbW91bnQ9MTAwMDAwMDAmYXNzZXQ9MzEyNzY5/eyJzdWNjZXNzIjoiaHR0cHM6Ly93d3cuYS13YWxsZXQubmV0LyIsImNhbmNlbCI6Imh0dHBzOi8vd3d3LmEtd2FsbGV0Lm5ldC8ifQ=="
               &gt;{{ $t("merchant.pay") }}&lt;/a&gt;
@@ -356,7 +363,7 @@
 <script>
 import PublicLayout from "../layouts/Public.vue";
 import base64url from "base64url";
-var Buffer = require("buffer/").Buffer;
+import { Buffer } from "buffer";
 window.Buffer = Buffer;
 
 export default {

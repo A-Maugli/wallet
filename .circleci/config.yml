@@ -1,38 +1,26 @@
-version: 2
-jobs:
+version: 2.1
+
+workflows:
   build:
+    jobs:
+      - test-job
+
+jobs:
+  test-job:
     docker:
-      - image: cypress/base:18.16.0
-        environment:
-          ## this enables colors in the output
-          TERM: xterm
-    working_directory: ~/app
+      - image: cimg/node:20.19.0-browsers  # Use image with browsers for Cypress
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - v1-deps-{{ .Branch }}
-            - v1-deps
       - run:
-          name: Install Dependencies
-          command: npm i
-      - save_cache:
-          key: v1-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
-          # cache NPM modules and the folder with the Cypress binary
-          paths:
-            - ~/.npm
-            - ~/.node_modules
-            - ~/.cache
+          name: Install dependencies
+          command: npm ci
       - run:
-          name: Build
+          name: Build application
           command: npm run build
       - run:
-          name: Run tests
+          name: Run tests with intelligent runner
           command: npm run test
-
       - store_artifacts:
           path: cypress/videos
       - store_artifacts:
           path: cypress/screenshots
-#      - run: $(npm bin)/cypress run --record --key <record_key>

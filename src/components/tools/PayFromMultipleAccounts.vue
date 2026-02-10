@@ -1,7 +1,7 @@
 <template>
   <div class="grid">
     <div class="col-12">
-      <h1>Pay from multiple accounts at once</h1>
+      <h1>{{ $t("tools.pay_from_multiple_title") }}</h1>
 
       <div class="field grid">
         <label
@@ -43,7 +43,7 @@
               :maxFractionDigits="6"
               class="w-full"
             />
-            <InputGroupAddon>Algo</InputGroupAddon>
+            <InputGroupAddon>{{ $t("common.algo") }}</InputGroupAddon>
           </InputGroup>
         </div>
       </div>
@@ -144,7 +144,6 @@ export default {
               "Line does not conaint mnemonic phrase: " + line + "\n";
             continue;
           }
-          let account = "";
           // mnemonic import
           let mn = "";
           for (let i = 0; i < 25; i++) {
@@ -153,8 +152,7 @@ export default {
           let secret = null;
           try {
             secret = algosdk.mnemonicToSecretKey(mn.trim());
-            account = secret.addr;
-          } catch (e) {
+          } catch {
             this.results += "Mnemonic is invalid: " + line + "\n";
             continue;
           }
@@ -199,8 +197,8 @@ export default {
                 this.sent = true;
               }
             });
-          } catch (e) {
-            console.error("error", e);
+          } catch (error) {
+            console.error("error", error);
           }
         }
       }

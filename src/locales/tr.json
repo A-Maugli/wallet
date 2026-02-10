@@ -4,7 +4,10 @@
     "text": "Aradığınız web sitesi bulunamıyor."
   },
   "footer": {
-    "text": "A-Wallet - Açık kaynak PWA Algorand topluluk cüzdanı"
+    "text": "A-Wallet - Açık kaynak PWA Algorand topluluk cüzdanı",
+    "session_timeout_header": "Oturum zaman aşımı uyarısı",
+    "session_timeout_message": "Oturumunuz yakında sona erecek. Devam etmek istiyor musunuz?",
+    "session_timeout_continue": "Oturuma devam et"
   },
   "login": {
     "new_wallet": "Yeni cüzdan",
@@ -27,6 +30,7 @@
     "go_back": "Geri dön",
     "go_home": "Anasayfa",
     "copy_address": "Adresi kopyala",
+    "copied": "Copied",
     "copied_to_clipboard": "Panoya kopyalandı",
     "stop_camera": "kamerayı durdur",
     "cancel": "İptal",
@@ -64,17 +68,8 @@
     "apps_optin_button": "Uygulamalara kaydolun",
     "execute_button_deflex": "Defex'i kullanarak uygulayın",
     "execute_button_folks": "Folks yönlendiricisini kullanarak uygulayın",
+    "execute_button_biatec": "Biatec yönlendiricisini kullanarak yürüt",
     "slippage": "Kayma(fiyat) farkı yüzdesi"
-  },
-  "votemenu": {
-    "overview": "Genel Bakış",
-    "my_questions": "Sorularım",
-    "ask_question": "Bir soru sor",
-    "delegation": "Delegasyon",
-    "answers": "Yanıtlar",
-    "trusted_list": "Güvenilir liste",
-    "governance": "Yönetim",
-    "ams01": "Oy coini"
   },
   "govtoolsmenu": {
     "gen": "Hesap oluştur",
@@ -82,89 +77,6 @@
     "optin": "Yönetişimi etkinleştirin",
     "pay": "Toplu ödeme N->1",
     "merge": "Hesapları birleştir N->1"
-  },
-  "voteask": {
-    "title": "Blockchain aracılığıyla soru sorun",
-    "question_title": "Soru başlığı",
-    "title_placeholder": "Bu, tablodaki soru listesinde görünecektir",
-    "question_text": "Sorunun metni",
-    "url": "Daha fazla soru ayrıntısı içeren URL adresi (https:// ile başlayın)",
-    "url_placeholder": "Kişilerin soru hakkında daha fazla bilgi bulabileceği bir url adresi ekleyin",
-    "max_round": "Şu andan itibaren sorunun kapatılacağı ana kadarki blok sayısı",
-    "calculated_block": "Maksimum blok",
-    "calculated_time": "Tahmini süre",
-    "code": "kod",
-    "response_text": "Yanıt seçeneğinin metni",
-    "remove_response": "Kaldır seçeneği",
-    "responses_help": "İnsanlar sorunuza belirli yanıtlara oy vererek yanıt verecektir. Lütfen 2-N yanıtın kodlarını ve metinlerini sağlayın.",
-    "add_response": "Yeni yanıt ekle",
-    "category": "Soru kategorisi",
-    "category_placeholder": "Bilgiye dayalı kategori oy delegasyonu yürürlükte",
-    "submit_question": "{accountName} hesabını kullanarak bir soru sorun"
-  },
-  "votedelegate": {
-    "title": "Oylama yetkisi delegasyonu",
-    "intro1": "Oy verme hakkınızı güvendiğiniz birine devredebilirsiniz. Bu arkadaşınız ya da tanınmış bir kişi olabilir.",
-    "intro2": "Finans alanında iyi bir arkadaşınız varsa, finans kategorisinde oy hakkınızı ona devredebilirsiniz. Eğer doğrudan sorulara oy vermiyorsa, sizin oy hakkınızı ve oy hakkını istediği başka birine devredebilir. bilir. Karşı taraf oy verdiğinde sizin oy gücünüzü kullanır ve fikrinizi temsil eder. Her zaman vekaleten kullanmış olsanız bile her konuda doğrudan oy kullanabilirsiniz. Doğrudan oy verirseniz oy hakkınız yalnızca sizin takdirinizde kalır.",
-    "intro3": "Oylama gücünüzü birkaç arkadaşınıza bölebilirsiniz. Oylama gücü dağıtımınızın ağırlığını puan olarak belirlersiniz. 1 numaralı arkadaşınız için 50 puan ve 2 numaralı arkadaşınız için 100 puan belirlerseniz, 1 numaralı arkadaşınızın 50 puanı olur /150 = Oylama gücünüzün %33'ü. Geri kalan 2. Arkadaşınız 100/150 = Oylama gücünüzün %67'sine sahip olacak.",
-    "intro4": "Herhangi bir kategori, geri dönüş kategorisidir. Belirli bir sorunun kategorisi tanımlanmamışsa, tanımlanmışsa herhangi bir kategori kullanılacaktır.",
-    "category_any": "Herhangi bir kategori",
-    "add_account": "Hesap ekle",
-    "wallet_address": "Cüzdan adresi",
-    "delegate": "Hesabı heyete ekle",
-    "category": "Belirli bir kategoriyi devret",
-    "category_placeholder": "Yetkilendirmenizi bilgi tabanlı bir kategoride belirtebilirsiniz. ör. BT, finans, yönetişim",
-    "add_category": "Belirli bir kategori ekleyin",
-    "submit_help": "Aşağıdaki butona tıklayarak, delegasyon tercihlerinizi blockchain'e depolayacaksınız.",
-    "submit_text": "{accountName} için yetki tercihlerini blok zincirine saklayın"
-  },
-  "voteoverview": {
-    "title": "Genel Bakış"
-  },
-  "votequestions": {
-    "title": "Sorular"
-  },
-  "votequestionlist": {
-    "question_title": "Soru başlığı",
-    "no_questions": "İlk soru soran siz olun",
-    "question_text": "Soru metni",
-    "round": "Yuvarlak olarak yerleştirildi",
-    "maxround": "Tura kadar açık",
-    "time": "Zaman",
-    "category": "Kategori",
-    "sender": "Soru soran",
-    "list": "Tüm soruları listele",
-    "id": "Soru kimliği",
-    "current_round": "Geçerli tur",
-    "round_time": "Turun zamanı",
-    "url": "URL",
-    "options": "Seçenekler",
-    "voting_closed": "Oylama kapatıldı",
-    "latest_response": "{accountName} hesabı için en son oy seçildi",
-    "vote_button": "{accountName} hesabıyla oy verin",
-    "sum_trusted": "Hesaplanan oy sayısı",
-    "sum_coins": "Hesaplanan coinlerin toplamı",
-    "trusted_list_results": "Güvenilen liste sonucu",
-    "hypercapitalism_results": "1 jeton 1 oy sonucu",
-    "vote_help": "Oy vermek istiyorsanız lütfen tercihlerinizi seçin. Her yanıt için tercihlerinizi 0'dan 100 puana kadar derecelendirebilirsiniz. Yalnızca bir yanıt seçmek istiyorsanız lütfen ona 100 puan verin, diğer tüm yanıtlara cevaplar 0 puan. Bilmiyorsanız oy vermenize gerek yoktur veya tüm cevaplara eşit puan verebilirsiniz. Bir cevaba 100 puan, diğer cevaba 20 puanla oy verirseniz, oy verme gücünüz ilk cevap 100/120 = %83, ikinci cevap ise %17 olacaktır. Tüm seçeneklere 100 puan verirseniz, oy gücü dağılımınız tüm seçeneklere 1 puan vermişsiniz gibi aynı olacaktır.",
-    "check_results": "Sonuçları kontrol et"
-  },
-  "votetl": {
-    "title": "Güvenilen liste yönetimi",
-    "help1": "Soru soran, bu sayfada güvenilir hesapların listesini yönetebilir. Her kişinin yalnızca bir güvenilir hesabı olabilir. Bunun yönetimi soruyu soran tarafından sağlanmalıdır. Oylama bittikten sonra iki oy hesaplaması vardır - biri kişi bir oy ve bir jeton bir oy.Oylama sistemi oylama sonucunun ne anlama geldiğini yorumlamaz.Oylama sistemi sadece oylama sistemi kurallarına göre oylama sonuçlarını hesaplar, örneğin oyların delegasyonu, oyların oranı, oyların geçerliliği oy vb.",
-    "add": "Hesapları güvenilenler listesine ekleyin - her satıra bir hesap",
-    "remove": "Hesapları güvenilir listeden kaldır - her satıra bir hesap",
-    "submit_text": "{accountName} için güvenilir listeyi blockchain'de depola",
-    "round": "n. turda eklendi.",
-    "account": "Güvenilen hesap",
-    "no_tl": "{accountName} hesabı için listelenen güvenilir hesap yok."
-  },
-  "voteanswerslist": {
-    "no_answers": "Sorunun yanıtı henüz yok.",
-    "round": "Tepki turu",
-    "time": "Tepki süresi",
-    "sender": "Yanıtlayan",
-    "response": "Yanıt json'u"
   },
   "merchant": {
     "make_payment": "Ödeme ağ geçidi",
@@ -285,7 +197,32 @@
     "arc14_help": "ARC 14, imzalı işlemleri kullanan kimlik doğrulama standardıdır. Kimlik doğrulama belirteçlerini bu sayfada oluşturabilirsiniz.",
     "account_actions": "Hesap işlemleri",
     "asset_optinArc200": "ARC200 varlığını tercih et",
-    "asset_optinArc200_help": "Hesabınızda ARC200 varlıklarını izleyebilirsiniz. ARC200 varlıkları, herkesin kullanıcının hesabına varlık alabilmeyi seçebileceği özelliğe sahip akıllı sözleşmelerdir. ARC200 varlıkları tehlikeli olabilir ve Akıllı sözleşme böylece ona tamamen güvenebilirsiniz."
+    "asset_optinArc200_help": "Hesabınızda ARC200 varlıklarını izleyebilirsiniz. ARC200 varlıkları, herkesin kullanıcının hesabına varlık alabilmeyi seçebileceği özelliğe sahip akıllı sözleşmelerdir. ARC200 varlıkları tehlikeli olabilir ve Akıllı sözleşme böylece ona tamamen güvenebilirsiniz.",
+    "scheduled_payment": "Scheduled payment",
+    "scheduled_payment_help": "You can setup and manage a scheduled periodic payments to another accounts",
+    "hide_account": "Hide account",
+    "unhide_account": "Unhide account",
+    "vote_first_round": "Vote First Round",
+    "vote_last_round": "Vote Last Round",
+    "vote_key_dilution": "Vote Key Dilution",
+    "selection_key": "Selection Key",
+    "vote_key": "Vote Key",
+    "stateproof_key": "StateProof Key",
+    "realm": "Realm",
+    "arc14msig_process": "Please sign ARC14 authentication transaction and return back to this form.",
+    "hasArc14": "ARC14 auth has been loaded.",
+    "generating_keys": "Generating participation keys.. Please be patient, the participation node is performing CPU sensitive task.",
+    "button_sign_keyreg": "Sign key registration tx",
+    "button_close_custom_keyreg": "Close KeyReg tx form",
+    "button_activate_wizzard": "Activate wizard",
+    "button_fetch_realm": "Step 1/4: Fetch ARC14 realm",
+    "button_sign_arc14": "Step 2/4: Sign ARC14 realm",
+    "button_sign_arc14_msig": "Step 2/4: Multisign ARC14 realm",
+    "button_load_participatin_data": "Step 3/4: Load participation data",
+    "button_sign_keyreg_tx": "Step 4/4: Sign participation tx",
+    "button_custom_keyreg": "Custom KeyReg tx",
+    "making_account_online": "Setting your account to online state. Please wait a while",
+    "making_account_offline": "Setting your account to offline state. Please wait a while"
   },
   "acc_overview_assets": {
     "name": "Ad",
@@ -375,12 +312,12 @@
     "email_pass_account": "E-posta ve Şifre hesabı",
     "shamir_account": "Shamir yedekleme kurtarma",
     "overview": "Yeni hesap işlemleri",
-    "create_basic_help": "Algorand temel hesabı, özel anahtara sahip ED25529 hesabıdır. Bu yöntem, hesabınız için sır oluşturmak için bilgisayarınızın rastgele sayı oluşturucusunu kullanır.",
+    "create_basic_help": "Algorand temel hesabı, özel anahtara sahip ED25519 hesabıdır. Bu yöntem, hesabınız için sır oluşturmak için bilgisayarınızın rastgele sayı oluşturucusunu kullanır.",
     "ledger_account_help": "En güvenli çözümlerden biri gizli anahtar oluşturma işlemini özel bir cihazla gerçekleştirmektir. Bu hesap, hesabınızı oluşturmak ve imzalama işlemlerini gerçekleştirmek için Ledger cihazını kullanır.",
     "wc_account_help": "Cüzdan bağlantı hesap türünü kullanarak arkadaşınızın cüzdanına bağlanabilirsiniz. Örneğin, çoklu imzanın bir parçası olarak ona mesajı imzalama isteği gönderebilirsiniz.",
     "twofa_account_help": "İki faktörlü hesap çoklu imzalı hesaptır; burada bir hesap sizin seçtiğiniz bir hesaptır, örneğin genel muhasebe hesabı veya e-posta şifresi hesabı, ikinci hesap kurtarma hesabıdır - ideal olarak aynı güvenli depolama alanında olmayan hesap ve üçüncü hesap ise doğru iki faktörlü pin kodunu girdiğinizde işlemleri imzalayan sunucudaki iki faktörlü hesap.",
     "email_pass_account_help": "ARC76 E-posta ve Şifre hesabı, herhangi bir metinden algorand hesabı oluşturmanıza olanak tanır. Metin hashlenir ve algorand hesabınız için tohum olarak 32 bayt oluşturur. Bu, bilgisayarınızdaki diğer rastgele sayı üreteçlerine alternatif olabilir veya iki faktörlü hesapta veya genel çoklu imza hesabında kullanabileceğiniz hw cihazı.",
-    "create_vanity_help": "ED25529 hesabınız için güzel hesap adresini kaba kuvvetle kullanabilirsiniz. Bu yöntem, hesap oluşturmanın birçok kombinasyonunu dener ve hesap adresinin ilk veya son harflerini seçmenize olanak tanır.",
+    "create_vanity_help": "ED25519 hesabınız için güzel hesap adresini kaba kuvvetle kullanabilirsiniz. Bu yöntem, hesap oluşturmanın birçok kombinasyonunu dener ve hesap adresinin ilk veya son harflerini seçmenize olanak tanır.",
     "create_multisign_account_help": "Multisig hesapları en güvenli hesaplardır. Birden fazla defter cihazı ve farklı rasgele sayı oluşturucularla birlikte kullanılırsa, bu, doğrudan algoritma ve blok zincirine sabit kodlanan kurumsal düzeyde güvenlik sağlar.",
     "watch_account_help": "Ağdaki herhangi bir hesabı takip edebilirsiniz.",
     "import_account_help": "Hesabı algoritma ve kurtarma anımsatıcısından kurtarabilirsiniz.",
@@ -388,7 +325,11 @@
     "create_first": "İlk hesabınızı oluşturun",
     "no_accounts_at_network": "Seçili ağ için hesap yok",
     "basic_options": "Temel seçenekler",
-    "advanced_options": "Gelişmiş seçenekler"
+    "advanced_options": "Gelişmiş seçenekler",
+    "skip_challange": "Skip challange",
+    "new_account_challange": "New account challange",
+    "click_to_show_positions": "Click to show positions",
+    "to": "to"
   },
   "arc76account": {
     "title": "E-posta ve şifre hesabı (ARC-0076)",
@@ -518,7 +459,7 @@
     "title": "İşlem detayı",
     "tr_id": "İşlem Kimliği",
     "tr_type": "İşlem türü",
-    "not": "Not",
+    "note": "Not",
     "note_raw": "Ham veriler",
     "note_decoded": "Şifresi çözülmüş veriler",
     "tr_close_rewards": "Ödülleri kapat",
@@ -630,7 +571,6 @@
     "a8_3": "İşlemleri imzalayabilen tüm hesapları seçin ve ağın çoklu imza ödemesini kabul etmesi için minimum sayıya uyan imza sayısını seçin.",
     "a8_4": "Çoklu imza hesabını oluşturduktan sonra bu hesaba hesap listesi sayfasından erişebilirsiniz."
   },
-
   "connect": {
     "title": "WalletConnect'i kullanarak DApp'lere bağlanın",
     "uri": "Cüzdanbağlantısı URI'si",
@@ -677,7 +617,9 @@
     "session_proposals": "Oturum önerileri",
     "toggle_camera": "Kamerayı değiştir",
     "init_wc": "Wallet Connect bağlantısını başlat",
-    "sign_all": "Tümünü imzala"
+    "sign_all": "Tümünü imzala",
+    "proposer": "Proposer",
+    "all_accounts": "Use all wallet accounts"
   },
   "new_account_wc": {
     "title": "WalletConnect hesabını ekleyin",
@@ -710,7 +652,11 @@
     "warning": "Ağdaki blokları doğrulamak için genel katılım düğümünü seçebilirsiniz. Genel algod sunucusunda yeni katılım anahtarları üretecek ve bu katılım anahtarlarının blok verilerini toplamasına izin vermek için işlemi imzalayacaksınız. Bu size maliyet olarak yansıyacaktır. ağ üzerinde bir işlem (0.001 algo). Çevrimiçi hesap durumu, özel anahtarınızın internete açık olduğu anlamına gelmez. Hesabınızın, blockchain'i koruyan çevrimiçi algod düğümünde kayıtlı olduğu anlamına gelir.",
     "makeOnline": "Hesabı çevrimiçi yapın",
     "makeOffline": "Hesabı çevrimdışı yap",
-    "host": "Algod ana bilgisayarı"
+    "host": "Algod ana bilgisayarı",
+    "fromclipboard": "Process data from clipboard",
+    "stakingRegistration": "Register for staking - 2A network fee",
+    "stakingHelp": "By paying 2 algorand now as network fee, and having more than 30k algos on your account, you are eligible to receive the staking rewards anytime the staking node mints new block.",
+    "onlineRounds": "Number of rounds to protect the network"
   },
   "new_account_shamir": {
     "header": "Shamir yedek hesap kurtarma",
@@ -752,5 +698,122 @@
     "is_opted_in": "Hesap varlık alabilir",
     "create_box": "Bu hesap için bu varlık için kutu oluştur",
     "save_action": "Varlığı hesabınıza kaydedin"
+  },
+  "scheduled_payments": {
+    "title": "Scheduled payments management",
+    "description": "With decentralized scheduler you will deploy the smart contract - escrow account which will be used for purpose to allow any executor perform withdrawal from your escrow account to the destination account when the time comes. Executors are incentivized to execute your scheduled task with vision of receiving small fee paid in ASA.Gold token - 0.001 gram of gold.",
+    "new_scheduled_payment": "New scheduled payment",
+    "period": "Period",
+    "pay_to": "Pay to",
+    "send_asset": "Asset to send",
+    "create_escrow_account": "Create escrow account",
+    "list_of_payments": "List of active payments",
+    "no_payment_found": "No scheduled payments has been found",
+    "app_id": "Escrow app id",
+    "app_address": "Escrow app address",
+    "start": "Start",
+    "fee_balance": "Fee balance",
+    "execution_fee": "Execution fee",
+    "description_detail": "In this detail overview of the scheduled payment you can see the current asset balance of the escrow account and you have actions to deposit more assets to the escrow account or to executors.",
+    "details_title": "Scheduled payment details",
+    "seconds": "seconds",
+    "deposit_fee_title": "Deposit asa.gold token to fee pool smart contract",
+    "fee_asset_id": "Execution fee token",
+    "amount_to_deposit": "Amount to deposit to fees",
+    "get_more": "Get more tokenized gold",
+    "list_of_assets": "List of assets at escrow account",
+    "assets_loading": "Asset information is loading",
+    "asset_id": "Asset ID",
+    "asset_name": "Asset name",
+    "asset_amount": "Asset amount",
+    "deposit": "Deposit",
+    "optin_title": "Escrow account optin action",
+    "optin_to_asset": "Opt in to asset",
+    "optin_click": "Opt in",
+    "withdraw_asset_title": "Withdraw from escrow account",
+    "withdraw_asset": "Asset to withdraw",
+    "withdraw_amount": "Amount to withdraw",
+    "withdraw_click": "Execute withdrawal",
+    "load_script_title": "Load app execution profile",
+    "load_click": "Load",
+    "xgov_promo": "This work has been performed with support from the Algorand Foundation xGov Grants Program"
+  },
+  "donation": {
+    "title": "Please help us",
+    "project_intro": "This project has been started in June 2021 as the first open source algorand wallet.",
+    "funding_received": "Thank to expert governors, we have received funds to create",
+    "twofa_accounts": "two factor authentication accounts",
+    "and": "and",
+    "payment_scheduler": "payment scheduler",
+    "community_active": "We are active in algorand community. We have created",
+    "algorand_directory": "Algorand Directory",
+    "wallet_support": ", besides the wallet support, we have created the",
+    "payment_gateway": "payment gateway",
+    "no_middleman": "which does not require any financial middleman, we have created open source decentralized voting system built on the algorand network, and we have built the decentralized",
+    "donation_web": "donation web",
+    "future_vision": "We have several visions where we can help the algorand community grow.",
+    "graphics_designer": "We would like to hire graphics designer to improve the Look&Feel of the AWallet. We expect costs approximately 1000 USDt.",
+    "donate_now": "Donate now",
+    "translation_cost": "Translation to other language costs approx 50 USD. Please send us in the note info to which language you would like the AWallet to be translated.",
+    "magento_gateway": "Payment gateway implementation to Magento - No middleman, you accept the payments to your account, match with invoices",
+    "accept_donations": "We accept donations to this account:",
+    "thank_you": "Thank you",
+    "ludo_scholtz": "Ludo Scholtz",
+    "company_name": "Scholtz&Company, jsa"
+  },
+  "placeholders": {
+    "source_asset": "Source asset",
+    "destination_asset": "Destination asset",
+    "service_realm": "Service realm. For example 2FA#ARC14",
+    "keyword_search": "Keyword Search",
+    "search_by_asset_id": "Search by asset id",
+    "search_by_type": "Search by type",
+    "search_by_date": "Search by date",
+    "search_by_amount": "Search by amount",
+    "search_by_sender": "Search by sender",
+    "search_by_receiver": "Search by receiver",
+    "search_by_fee": "Search by fee",
+    "search_by_round": "Search by round",
+    "search_by_name": "Search by name",
+    "search_by_address": "Search by address"
+  },
+  "buttons": {
+    "try_it_out": "Try it out",
+    "exchange_tokens": "⇅ Exchange source and destination token"
+  },
+  "labels": {
+    "use_folks": "Use Folks router",
+    "use_deflex": "Use Haystack router",
+    "use_biatec": "Use Biatec router",
+    "quote": "Quote:",
+    "price": "Price:"
+  },
+  "success": {
+    "payment_successful": "Payment has been successful",
+    "thank_you_payment": "Thank you for your payment"
+  },
+  "sign_all": {
+    "title": "Sign multiple transactions",
+    "transaction_confirmed": "Transaction confirmed in round"
+  },
+  "arc14": {
+    "service_realm_title": "Service realm",
+    "network_note": "Note that ARC14 requires selection of the network. Make sure that you are using same network as destination service.",
+    "copy_token_to_dashboard": "Copy token to dashboard",
+    "token_copied_to_clipboard": "Token copied to clipboard"
+  },
+  "tools": {
+    "opt_in_governance_title": "Opt in for algorand governance from multiple accounts at once",
+    "opt_in_governance_help": "To opt in as a governor, you need to send message from your account to the algorand foundation specific account with message how much algos you opt in in specific perior.",
+    "merge_accounts_title": "Merge multiple accounts to one",
+    "pay_multiple_title": "Pay to multiple accounts from single account - Distribute algos",
+    "pay_from_multiple_title": "Pay from multiple accounts at once",
+    "generate_accounts_title": "Generate multiple accounts",
+    "results": "Results"
+  },
+  "common": {
+    "go": "Go",
+    "algo": "Algo",
+    "algorand": "Algorand"
   }
 }

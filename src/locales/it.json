@@ -4,7 +4,10 @@
     "text": "Il contenuto che state cercando non è stato trovato"
   },
   "footer": {
-    "text": "A-Wallet - Open source PWA Algorand community wallet"
+    "text": "A-Wallet - Open source PWA Algorand community wallet",
+    "session_timeout_header": "Avviso di timeout della sessione",
+    "session_timeout_message": "La tua sessione scadrà presto. Vuoi continuare?",
+    "session_timeout_continue": "Continua sessione"
   },
   "login": {
     "new_wallet": "Nuovo wallet",
@@ -27,12 +30,14 @@
     "go_back": "Indietro",
     "go_home": "Torna alla Home",
     "copy_address": "Copia indirizzo",
+    "copied": "Copied",
     "copied_to_clipboard": "Copiato negli appunti",
     "stop_camera": "Stop camera",
     "cancel": "Cancel",
     "yes": "Yes",
     "no": "No",
     "loading": "Loading..",
+    "last_error": "Ultimo errore",
     "keyword_search": "Keyword Search"
   },
   "navbar": {
@@ -61,8 +66,9 @@
     "get_quote": "Get quote",
     "apps_optin": "SWAP requires your account to opt in to the applications",
     "apps_optin_button": "Opt in to the apps",
-    "execute_button_deflex": "Execute using Deflex",
+    "execute_button_deflex": "Execute using Haystack router",
     "execute_button_folks": "Execute using Folks router",
+    "execute_button_biatec": "Esegui usando Biatec router",
     "slippage": "Slippage percentage"
   },
   "govtoolsmenu": {
@@ -191,7 +197,32 @@
     "arc14_help": "ARC 14 is authentication standard utilizing signed transactions. You can generate the authentication tokens on this page.",
     "account_actions": "Account actions",
     "asset_optinArc200": "OptIn to ARC200 asset",
-    "asset_optinArc200_help": "You can watch on your account the ARC200 assets. ARC200 assets are smart contracts with feature that anyone can opt in user's account to be able to receive the asset. ARC200 assets may be dangerous and you should require trustworthy audit of the smart contract so that you can fully trust it."
+    "asset_optinArc200_help": "You can watch on your account the ARC200 assets. ARC200 assets are smart contracts with feature that anyone can opt in user's account to be able to receive the asset. ARC200 assets may be dangerous and you should require trustworthy audit of the smart contract so that you can fully trust it.",
+    "scheduled_payment": "Scheduled payment",
+    "scheduled_payment_help": "You can setup and manage a scheduled periodic payments to another accounts",
+    "hide_account": "Hide account",
+    "unhide_account": "Unhide account",
+    "vote_first_round": "Vote First Round",
+    "vote_last_round": "Vote Last Round",
+    "vote_key_dilution": "Vote Key Dilution",
+    "selection_key": "Selection Key",
+    "vote_key": "Vote Key",
+    "stateproof_key": "StateProof Key",
+    "realm": "Realm",
+    "arc14msig_process": "Please sign ARC14 authentication transaction and return back to this form.",
+    "hasArc14": "ARC14 auth has been loaded.",
+    "generating_keys": "Generating participation keys.. Please be patient, the participation node is performing CPU sensitive task.",
+    "button_sign_keyreg": "Sign key registration tx",
+    "button_close_custom_keyreg": "Close KeyReg tx form",
+    "button_activate_wizzard": "Activate wizard",
+    "button_fetch_realm": "Step 1/4: Fetch ARC14 realm",
+    "button_sign_arc14": "Step 2/4: Sign ARC14 realm",
+    "button_sign_arc14_msig": "Step 2/4: Multisign ARC14 realm",
+    "button_load_participatin_data": "Step 3/4: Load participation data",
+    "button_sign_keyreg_tx": "Step 4/4: Sign participation tx",
+    "button_custom_keyreg": "Custom KeyReg tx",
+    "making_account_online": "Setting your account to online state. Please wait a while",
+    "making_account_offline": "Setting your account to offline state. Please wait a while"
   },
   "acc_overview_assets": {
     "name": "Name",
@@ -281,12 +312,12 @@
     "email_pass_account": "Email & Password account",
     "shamir_account": "Shamir backup recovery",
     "overview": "New account actions",
-    "create_basic_help": "Algorand basic account is ED25529 account with private key. This method uses your computer random number generator to create secret for your account.",
+    "create_basic_help": "Algorand basic account is ED25519 account with private key. This method uses your computer random number generator to create secret for your account.",
     "ledger_account_help": "One of most secure solutions is to handle the secret key generation by specialized device. This account utilizes Ledger device to create your account and handle the signing operations.",
     "wc_account_help": "You can connect to your friend's wallet using the wallet connect account type. You can send them request to sign the message for example as part of multisig.",
     "twofa_account_help": "Two factor account is multisig account, where one account is account of your choosing for example ledger account or email password account, second account is recovery account - ideally account which is not in the same secure storage, and third account is the two factor account from the server which signs transactions when you provide correct two factor pin code.",
     "email_pass_account_help": "ARC76 Email & Password account allows you to generate algorand account from any text. The text is hashed and generates 32 bytes as seed for your algorand account. This may be alternative to other types of random number generators in your computer or hw device which you can utilize in two factor account or generic multisig account.",
-    "create_vanity_help": "You can brute force nice account address for your ED25529 account. This method simply tries a lot of combinations of creating account and lets you pick first or last letters of the account address.",
+    "create_vanity_help": "You can brute force nice account address for your ED25519 account. This method simply tries a lot of combinations of creating account and lets you pick first or last letters of the account address.",
     "create_multisign_account_help": "Multisig accounts are the most secure accounts. If used in combination of multiple ledger devices and different random number generators, this provides enterprise level of security which is hardcoded directly to the algorand blockchain.",
     "watch_account_help": "You can track any account on the network.",
     "import_account_help": "You can recover the account from the algorand recovery mnemonic.",
@@ -294,7 +325,11 @@
     "create_first": "Create your first account",
     "no_accounts_at_network": "There are no accounts for selected network",
     "basic_options": "Basic options",
-    "advanced_options": "Advanced options"
+    "advanced_options": "Advanced options",
+    "skip_challange": "Skip challange",
+    "new_account_challange": "New account challange",
+    "click_to_show_positions": "Click to show positions",
+    "to": "to"
   },
   "arc76account": {
     "title": "Email and password account (ARC-0076)",
@@ -582,7 +617,9 @@
     "session_proposals": "Session proposals",
     "toggle_camera": "Toggle camera",
     "init_wc": "Initialize connection to Wallet Connect",
-    "sign_all": "Sign all"
+    "sign_all": "Sign all",
+    "proposer": "Proposer",
+    "all_accounts": "Use all wallet accounts"
   },
   "new_account_wc": {
     "title": "Add WalletConnect account",
@@ -615,7 +652,11 @@
     "warning": "You can select public participation node in order to verify the blocks in the network. You will generate new participation keys at the public algod server and sign the transaction to allow these participation keys collect blocks data. This will cost you as one transaction on the network (0.001 algo). Online account state does not mean that your private key is exposed to the internet. It means that your account is registered at the online algod node which is protecting blockchain.",
     "makeOnline": "Make account online",
     "makeOffline": "Make account offline",
-    "host": "Algod host"
+    "host": "Algod host",
+    "fromclipboard": "Process data from clipboard",
+    "stakingRegistration": "Register for staking - 2A network fee",
+    "stakingHelp": "By paying 2 algorand now as network fee, and having more than 30k algos on your account, you are eligible to receive the staking rewards anytime the staking node mints new block.",
+    "onlineRounds": "Number of rounds to protect the network"
   },
   "new_account_shamir": {
     "header": "Shamir backup account recovery",
@@ -657,5 +698,122 @@
     "is_opted_in": "Account can receive asset",
     "create_box": "Create box for this asset for this account",
     "save_action": "Save asset to your account"
+  },
+  "scheduled_payments": {
+    "title": "Scheduled payments management",
+    "description": "With decentralized scheduler you will deploy the smart contract - escrow account which will be used for purpose to allow any executor perform withdrawal from your escrow account to the destination account when the time comes. Executors are incentivized to execute your scheduled task with vision of receiving small fee paid in ASA.Gold token - 0.001 gram of gold.",
+    "new_scheduled_payment": "New scheduled payment",
+    "period": "Period",
+    "pay_to": "Pay to",
+    "send_asset": "Asset to send",
+    "create_escrow_account": "Create escrow account",
+    "list_of_payments": "List of active payments",
+    "no_payment_found": "No scheduled payments has been found",
+    "app_id": "Escrow app id",
+    "app_address": "Escrow app address",
+    "start": "Start",
+    "fee_balance": "Fee balance",
+    "execution_fee": "Execution fee",
+    "description_detail": "In this detail overview of the scheduled payment you can see the current asset balance of the escrow account and you have actions to deposit more assets to the escrow account or to executors.",
+    "details_title": "Scheduled payment details",
+    "seconds": "seconds",
+    "deposit_fee_title": "Deposit asa.gold token to fee pool smart contract",
+    "fee_asset_id": "Execution fee token",
+    "amount_to_deposit": "Amount to deposit to fees",
+    "get_more": "Get more tokenized gold",
+    "list_of_assets": "List of assets at escrow account",
+    "assets_loading": "Asset information is loading",
+    "asset_id": "Asset ID",
+    "asset_name": "Asset name",
+    "asset_amount": "Asset amount",
+    "deposit": "Deposit",
+    "optin_title": "Escrow account optin action",
+    "optin_to_asset": "Opt in to asset",
+    "optin_click": "Opt in",
+    "withdraw_asset_title": "Withdraw from escrow account",
+    "withdraw_asset": "Asset to withdraw",
+    "withdraw_amount": "Amount to withdraw",
+    "withdraw_click": "Execute withdrawal",
+    "load_script_title": "Load app execution profile",
+    "load_click": "Load",
+    "xgov_promo": "This work has been performed with support from the Algorand Foundation xGov Grants Program"
+  },
+  "donation": {
+    "title": "Please help us",
+    "project_intro": "This project has been started in June 2021 as the first open source algorand wallet.",
+    "funding_received": "Thank to expert governors, we have received funds to create",
+    "twofa_accounts": "two factor authentication accounts",
+    "and": "and",
+    "payment_scheduler": "payment scheduler",
+    "community_active": "We are active in algorand community. We have created",
+    "algorand_directory": "Algorand Directory",
+    "wallet_support": ", besides the wallet support, we have created the",
+    "payment_gateway": "payment gateway",
+    "no_middleman": "which does not require any financial middleman, we have created open source decentralized voting system built on the algorand network, and we have built the decentralized",
+    "donation_web": "donation web",
+    "future_vision": "We have several visions where we can help the algorand community grow.",
+    "graphics_designer": "We would like to hire graphics designer to improve the Look&Feel of the AWallet. We expect costs approximately 1000 USDt.",
+    "donate_now": "Donate now",
+    "translation_cost": "Translation to other language costs approx 50 USD. Please send us in the note info to which language you would like the AWallet to be translated.",
+    "magento_gateway": "Payment gateway implementation to Magento - No middleman, you accept the payments to your account, match with invoices",
+    "accept_donations": "We accept donations to this account:",
+    "thank_you": "Thank you",
+    "ludo_scholtz": "Ludo Scholtz",
+    "company_name": "Scholtz&Company, jsa"
+  },
+  "placeholders": {
+    "source_asset": "Source asset",
+    "destination_asset": "Destination asset",
+    "service_realm": "Service realm. For example 2FA#ARC14",
+    "keyword_search": "Keyword Search",
+    "search_by_asset_id": "Search by asset id",
+    "search_by_type": "Search by type",
+    "search_by_date": "Search by date",
+    "search_by_amount": "Search by amount",
+    "search_by_sender": "Search by sender",
+    "search_by_receiver": "Search by receiver",
+    "search_by_fee": "Search by fee",
+    "search_by_round": "Search by round",
+    "search_by_name": "Search by name",
+    "search_by_address": "Search by address"
+  },
+  "buttons": {
+    "try_it_out": "Try it out",
+    "exchange_tokens": "⇅ Exchange source and destination token"
+  },
+  "labels": {
+    "use_folks": "Use Folks router",
+    "use_deflex": "Use Haystack router",
+    "use_biatec": "Use Biatec router",
+    "quote": "Quote:",
+    "price": "Price:"
+  },
+  "success": {
+    "payment_successful": "Payment has been successful",
+    "thank_you_payment": "Thank you for your payment"
+  },
+  "sign_all": {
+    "title": "Sign multiple transactions",
+    "transaction_confirmed": "Transaction confirmed in round"
+  },
+  "arc14": {
+    "service_realm_title": "Service realm",
+    "network_note": "Note that ARC14 requires selection of the network. Make sure that you are using same network as destination service.",
+    "copy_token_to_dashboard": "Copy token to dashboard",
+    "token_copied_to_clipboard": "Token copied to clipboard"
+  },
+  "tools": {
+    "opt_in_governance_title": "Opt in for algorand governance from multiple accounts at once",
+    "opt_in_governance_help": "To opt in as a governor, you need to send message from your account to the algorand foundation specific account with message how much algos you opt in in specific perior.",
+    "merge_accounts_title": "Merge multiple accounts to one",
+    "pay_multiple_title": "Pay to multiple accounts from single account - Distribute algos",
+    "pay_from_multiple_title": "Pay from multiple accounts at once",
+    "generate_accounts_title": "Generate multiple accounts",
+    "results": "Results"
+  },
+  "common": {
+    "go": "Go",
+    "algo": "Algo",
+    "algorand": "Algorand"
   }
 }
