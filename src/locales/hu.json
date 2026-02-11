@@ -1,11 +1,11 @@
 {
   "404": {
-    "header": "404-es hiba - az oldal nem található",
+    "header": "404-es hiba – az oldal nem található",
     "text": "A keresett weboldal nem található."
   },
   "footer": {
     "text": "A-Wallet -  Nyílt forráskódú PWA Algorand közösségi pénztárca",
-    "session_timeout_header": "Munkamenet-időtúllépésre figyelmeztetés",
+    "session_timeout_header": "Munkamenet-időtúllépés, figyelmeztetés",
     "session_timeout_message": "A munkamenet hamarosan lejár. Szeretné folytatni?",
     "session_timeout_continue": "Munkamenet folytatása"
   },
@@ -15,7 +15,7 @@
     "new_wallet_pass": "Pénztárca jelszava",
     "new_wallet_button_create": "Pénztárca létrehozása",
     "new_wallet_button_import": "Pénztárca importálása",
-    "new_wallet_help1": "A pénztárca a böngészőjében lesz tárolva. A pénztárca megnyitásához, a benne lévő számlák megtekintéséhez és a tranzakciók aláírásához egy pénztárca jelszó szükséges.",
+    "new_wallet_help1": "A pénztárca a böngészőben lesz tárolva. A pénztárca megnyitásához, a benne lévő számlák megtekintéséhez és a tranzakciók aláírásához egy pénztárca jelszó szükséges.",
     "new_wallet_help2": "Javasoljuk, hogy a jelszó legalább 12 karakter hosszú legyen, és tartalmazzon kisbetűt, nagybetűt, számot és speciális karaktert.",
     "open_wallet": "Pénztárca megnyitása",
     "select_wallet": "Pénztárca kiválasztása",
@@ -654,7 +654,7 @@
     "makeOffline": "A számla offline állapotba állítása",
     "host": "Algod hoszt",
     "fromclipboard": "Adatok feldolgozása a vágólapról",
-    "stakingRegistration": "Regisztrálás a staking-re -- 2 Algo hálózati díjért",
+    "stakingRegistration": "Regisztrálás a staking-re – 2 Algo hálózati díjért",
     "stakingHelp": "Ha kifizeted a 2 Algo hálózati díjat, és az Algorand számládon legalább 30k Algo van, akkor jogosulttá válsz arra, hogy staking jutalmat kapj, ha a staking csomópont egy új blokkot hoz létre.",
     "onlineRounds": "A hálózat védelmére szolgáló fordulók száma"
   },
